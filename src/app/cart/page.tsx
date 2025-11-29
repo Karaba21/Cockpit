@@ -1,14 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Trash2, Minus, Plus } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 const CartPage = () => {
-    const { items, removeFromCart, updateQuantity } = useCart();
+    const { items, removeFromCart, updateQuantity, getCheckoutUrl } = useCart();
+    const [isCheckingOut, setIsCheckingOut] = useState(false);
+    const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    const handleCheckout = async () => {
+        setIsCheckingOut(true);
+        setCheckoutError(null);
+
+        try {
+            const checkoutUrl = await getCheckoutUrl();
+            if (checkoutUrl) {
+                // Redirect to Shopify checkout
+                window.location.href = checkoutUrl;
+            } else {
+                setCheckoutError('No se pudo obtener la URL de pago. Por favor, intenta de nuevo.');
+            }
+        } catch (error) {
+            console.error('Checkout error:', error);
+            setCheckoutError('Ocurrió un error al procesar el pago. Por favor, intenta de nuevo.');
+        } finally {
+            setIsCheckingOut(false);
+        }
+    };
 
     if (items.length === 0) {
         return (
@@ -97,8 +119,18 @@ const CartPage = () => {
                             <span className="font-bold text-2xl text-primary">${subtotal.toLocaleString('es-UY')}</span>
                         </div>
 
-                        <button className="w-full bg-primary hover:bg-primary-hover text-surface font-bold py-4 rounded-full transition-colors uppercase tracking-wider">
-                            Pagar pedido
+                        {checkoutError && (
+                            <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded text-red-500 text-sm">
+                                {checkoutError}
+                            </div>
+                        )}
+
+                        <button
+                            onClick={handleCheckout}
+                            disabled={isCheckingOut}
+                            className="w-full bg-primary hover:bg-primary-hover text-surface font-bold py-4 rounded-full transition-colors uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {isCheckingOut ? 'Procesando...' : 'Pagar pedido'}
                         </button>
                     </div>
                 </div>

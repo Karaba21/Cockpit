@@ -57,6 +57,7 @@ function normalizeProduct(shopifyProduct: any): Product {
             altText: edge.node.altText || shopifyProduct.title,
         })),
         tags: shopifyProduct.tags,
+        variantId: variant?.id,
     };
 }
 
@@ -216,5 +217,247 @@ export async function getAllProducts(): Promise<Product[]> {
     } catch (error) {
         console.error('Error fetching all products:', error);
         return [];
+    }
+}
+
+// Cart Mutations and Queries
+
+const CART_CREATE_MUTATION = `
+  mutation cartCreate($input: CartInput!) {
+    cartCreate(input: $input) {
+      cart {
+        id
+        checkoutUrl
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  product {
+                    title
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+const CART_LINES_ADD_MUTATION = `
+  mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+    cartLinesAdd(cartId: $cartId, lines: $lines) {
+      cart {
+        id
+        checkoutUrl
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+const CART_LINES_UPDATE_MUTATION = `
+  mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+    cartLinesUpdate(cartId: $cartId, lines: $lines) {
+      cart {
+        id
+        checkoutUrl
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+const CART_LINES_REMOVE_MUTATION = `
+  mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+    cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+      cart {
+        id
+        checkoutUrl
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+const CART_QUERY = `
+  query cart($id: ID!) {
+    cart(id: $id) {
+      id
+      checkoutUrl
+      lines(first: 10) {
+        edges {
+          node {
+            id
+            quantity
+            merchandise {
+              ... on ProductVariant {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export async function createCart(merchandiseId: string, quantity: number = 1): Promise<{ cartId: string; checkoutUrl: string } | null> {
+    try {
+        const data = await shopifyFetch<{ cartCreate: { cart: any; userErrors: any[] } }>({
+            query: CART_CREATE_MUTATION,
+            variables: {
+                input: {
+                    lines: [
+                        {
+                            merchandiseId,
+                            quantity,
+                        },
+                    ],
+                },
+            },
+        });
+
+        if (data.cartCreate.userErrors.length > 0) {
+            console.error('Cart creation errors:', data.cartCreate.userErrors);
+            return null;
+        }
+
+        return {
+            cartId: data.cartCreate.cart.id,
+            checkoutUrl: data.cartCreate.cart.checkoutUrl,
+        };
+    } catch (error) {
+        console.error('Error creating cart:', error);
+        return null;
+    }
+}
+
+export async function addToShopifyCart(cartId: string, merchandiseId: string, quantity: number = 1): Promise<boolean> {
+    try {
+        const data = await shopifyFetch<{ cartLinesAdd: { cart: any; userErrors: any[] } }>({
+            query: CART_LINES_ADD_MUTATION,
+            variables: {
+                cartId,
+                lines: [
+                    {
+                        merchandiseId,
+                        quantity,
+                    },
+                ],
+            },
+        });
+
+        if (data.cartLinesAdd.userErrors.length > 0) {
+            console.error('Add to cart errors:', data.cartLinesAdd.userErrors);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error adding to cart:', error);
+        return false;
+    }
+}
+
+export async function updateShopifyCartLine(cartId: string, lineId: string, quantity: number): Promise<boolean> {
+    try {
+        const data = await shopifyFetch<{ cartLinesUpdate: { cart: any; userErrors: any[] } }>({
+            query: CART_LINES_UPDATE_MUTATION,
+            variables: {
+                cartId,
+                lines: [
+                    {
+                        id: lineId,
+                        quantity,
+                    },
+                ],
+            },
+        });
+
+        if (data.cartLinesUpdate.userErrors.length > 0) {
+            console.error('Update cart errors:', data.cartLinesUpdate.userErrors);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error updating cart:', error);
+        return false;
+    }
+}
+
+export async function removeFromShopifyCart(cartId: string, lineId: string): Promise<boolean> {
+    try {
+        const data = await shopifyFetch<{ cartLinesRemove: { cart: any; userErrors: any[] } }>({
+            query: CART_LINES_REMOVE_MUTATION,
+            variables: {
+                cartId,
+                lineIds: [lineId],
+            },
+        });
+
+        if (data.cartLinesRemove.userErrors.length > 0) {
+            console.error('Remove from cart errors:', data.cartLinesRemove.userErrors);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error removing from cart:', error);
+        return false;
+    }
+}
+
+export async function getShopifyCart(cartId: string): Promise<{ checkoutUrl: string; lines: any[] } | null> {
+    try {
+        const data = await shopifyFetch<{ cart: any }>({
+            query: CART_QUERY,
+            variables: { id: cartId },
+        });
+
+        if (!data.cart) {
+            return null;
+        }
+
+        return {
+            checkoutUrl: data.cart.checkoutUrl,
+            lines: data.cart.lines.edges.map((edge: any) => edge.node),
+        };
+    } catch (error) {
+        console.error('Error fetching cart:', error);
+        return null;
     }
 }
