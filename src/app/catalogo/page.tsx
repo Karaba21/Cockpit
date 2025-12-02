@@ -31,6 +31,18 @@ export async function generateMetadata({ searchParams }: CatalogPageProps): Prom
             description,
             url: category ? `/catalogo?category=${category}` : '/catalogo',
             type: 'website',
+            images: [
+                {
+                    url: `${siteUrl}/opengraph.png`,
+                    width: 1200,
+                    height: 630,
+                    alt: 'Cockpit UY',
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            images: [`${siteUrl}/opengraph.png`],
         },
         alternates: {
             canonical: category ? `/catalogo?category=${category}` : '/catalogo',

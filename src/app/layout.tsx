@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: '/opengraph.png',
+        url: `${siteUrl}/opengraph.png`,
         width: 1200,
         height: 630,
         alt: siteName,
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${siteName} | Líderes en Simracing`,
     description: defaultDescription,
-    images: ['/opengraph.png'],
+    images: [`${siteUrl}/opengraph.png`],
   },
   robots: {
     index: true,

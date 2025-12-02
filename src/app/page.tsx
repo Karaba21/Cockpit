@@ -6,6 +6,9 @@ import StatsStrip from '@/components/home/StatsStrip';
 import PickupSection from '@/components/home/PickupSection';
 import { getProductsByCollection } from '@/lib/shopify';
 import type { Metadata } from 'next';
+import { getSiteUrl } from '@/lib/seo';
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: 'Inicio',
@@ -15,6 +18,18 @@ export const metadata: Metadata = {
     description: 'Tienda líder de simracing en Uruguay. Soportes, volantes, mods y accesorios para simuladores de carreras.',
     url: '/',
     type: 'website',
+    images: [
+      {
+        url: `${siteUrl}/opengraph.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Cockpit UY',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [`${siteUrl}/opengraph.png`],
   },
   alternates: {
     canonical: '/',
