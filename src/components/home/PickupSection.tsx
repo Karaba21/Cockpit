@@ -14,7 +14,7 @@ const PickupSection = () => {
                     {/* Left Side - Location Information */}
                     <div className="space-y-6">
                         <h3 className="text-2xl font-bold italic text-foreground mb-6">
-                            GP Automóviles
+                            Cockpit UY
                         </h3>
 
                         {/* Address */}
@@ -25,7 +25,7 @@ const PickupSection = () => {
                             <div>
                                 <h4 className="font-bold text-foreground mb-1">Dirección</h4>
                                 <p className="text-arena text-sm">
-                                    General Fructuoso Rivera 3334, San José de Mayo
+                                    Carrasco Norte, Montevideo
                                 </p>
                             </div>
                         </div>
@@ -41,7 +41,7 @@ const PickupSection = () => {
                                     href="tel:+59899493618"
                                     className="text-arena text-sm hover:text-primary transition-all duration-300"
                                 >
-                                    +598 99 493 618
+                                    +598 ...
                                 </a>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ const PickupSection = () => {
                                     href="mailto:gp.automoviles@gmail.com"
                                     className="text-arena text-sm hover:text-primary transition-all duration-300"
                                 >
-                                    gp.automoviles@gmail.com
+                                    ...@gmail.com
                                 </a>
                             </div>
                         </div>

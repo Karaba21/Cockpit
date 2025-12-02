@@ -8,9 +8,9 @@ const HeroSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 min-h-[600px]">
                 {/* Left Content */}
                 <div className="flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 py-12 z-10 relative">
-                    <div className="mb-6 relative w-64 h-24">
+                    <div className="mb-2 relative w-full max-w-[600px] h-64 md:h-80 lg:h-96">
                         <Image
-                            src="/geminilogo2.png"
+                            src="/gemini3.png"
                             alt="Cockpit UY Logo"
                             fill
                             className="object-contain object-left"
