@@ -2,6 +2,41 @@ import React from 'react';
 import ProductGrid from '@/components/product/ProductGrid';
 import { getAllProducts, getProductsByCollection } from '@/lib/shopify';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { getSiteUrl } from '@/lib/seo';
+
+const siteUrl = getSiteUrl();
+
+export async function generateMetadata({ searchParams }: CatalogPageProps): Promise<Metadata> {
+    const resolvedSearchParams = await searchParams;
+    const category = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : undefined;
+    
+    const categoryNames: Record<string, string> = {
+        soportes: 'Soportes',
+        volantes: 'Volantes',
+        accesorios: 'Accesorios',
+    };
+
+    const categoryName = category ? categoryNames[category] || category : 'Todos';
+    const title = category ? `${categoryName} - Catálogo` : 'Catálogo Completo';
+    const description = category 
+        ? `Explora nuestra selección de ${categoryName.toLowerCase()} para simracing. Productos de calidad en Uruguay.`
+        : 'Explora nuestro catálogo completo de productos para simracing. Soportes, volantes, mods y accesorios. Envíos a todo Uruguay.';
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title: `${title} | Cockpit UY`,
+            description,
+            url: category ? `/catalogo?category=${category}` : '/catalogo',
+            type: 'website',
+        },
+        alternates: {
+            canonical: category ? `/catalogo?category=${category}` : '/catalogo',
+        },
+    };
+}
 
 interface CatalogPageProps {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

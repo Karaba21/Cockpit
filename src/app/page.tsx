@@ -5,6 +5,21 @@ import ReviewsCarousel from '@/components/home/ReviewsCarousel';
 import StatsStrip from '@/components/home/StatsStrip';
 import PickupSection from '@/components/home/PickupSection';
 import { getProductsByCollection } from '@/lib/shopify';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Inicio',
+  description: 'Tienda líder de simracing en Uruguay. Descubre nuestros soportes, volantes, mods y accesorios para simuladores de carreras. Envíos a todo el país.',
+  openGraph: {
+    title: 'Cockpit UY | Líderes en Simracing',
+    description: 'Tienda líder de simracing en Uruguay. Soportes, volantes, mods y accesorios para simuladores de carreras.',
+    url: '/',
+    type: 'website',
+  },
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default async function Home() {
   const soportes = await getProductsByCollection('soportes');

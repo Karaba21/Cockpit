@@ -1,11 +1,38 @@
 import React from 'react';
 import { searchProducts } from '@/lib/shopify';
 import ProductGrid from '@/components/product/ProductGrid';
+import type { Metadata } from 'next';
+import { getSiteUrl } from '@/lib/seo';
 
-export const metadata = {
-    title: 'Resultados de búsqueda | Cockpit',
-    description: 'Resultados de búsqueda de productos en Cockpit',
-};
+const siteUrl = getSiteUrl();
+
+export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
+    const resolvedSearchParams = await searchParams;
+    const query = typeof resolvedSearchParams.q === 'string' ? resolvedSearchParams.q : '';
+    
+    const title = query ? `Resultados para "${query}"` : 'Búsqueda';
+    const description = query 
+        ? `Resultados de búsqueda para "${query}" en Cockpit UY. Encuentra productos de simracing en Uruguay.`
+        : 'Busca productos de simracing en Cockpit UY. Soportes, volantes, mods y accesorios.';
+
+    return {
+        title,
+        description,
+        robots: {
+            index: false,
+            follow: true,
+        },
+        openGraph: {
+            title: `${title} | Cockpit UY`,
+            description,
+            url: query ? `/search?q=${encodeURIComponent(query)}` : '/search',
+            type: 'website',
+        },
+        alternates: {
+            canonical: query ? `/search?q=${encodeURIComponent(query)}` : '/search',
+        },
+    };
+}
 
 interface SearchPageProps {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
