@@ -12,7 +12,7 @@
  */
 export function getSiteUrl(): string {
   // Prioriza SITE_URL (solo servidor) sobre NEXT_PUBLIC_SITE_URL
-  return process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://cockpit.uy';
+  return process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://cockpituy.com';
 }
 
 export const seoConfig = {
