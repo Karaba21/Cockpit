@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: '/logocockpit.png',
+        url: '/opengraph.png',
         width: 1200,
         height: 630,
         alt: siteName,
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${siteName} | Líderes en Simracing`,
     description: defaultDescription,
-    images: ['/logocockpit.png'],
+    images: ['/opengraph.png'],
   },
   robots: {
     index: true,
@@ -108,7 +108,7 @@ export default function RootLayout({
     name: siteName,
     description: defaultDescription,
     url: siteUrl,
-    logo: `${siteUrl}/logocockpit.png`,
+    logo: `${siteUrl}/opengraph.png`,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'UY',
