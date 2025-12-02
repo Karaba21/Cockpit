@@ -91,19 +91,20 @@ body {
 
 /* Reviews Carousel Animation */
 @keyframes scroll {
-  0% {
+  from {
     transform: translateX(0);
   }
 
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }
 
-.animate-scroll {
-  animation: scroll 5s linear infinite;
+.animate-scroll-infinite {
+  animation: scroll 40s linear infinite;
+  will-change: transform;
 }
 
-.animate-scroll:hover {
+.animate-scroll-infinite:hover {
   animation-play-state: paused;
 }

@@ -19,6 +19,7 @@ const reviewImages = [
 
 const ReviewsCarousel = () => {
     // Duplicamos las imágenes para crear un loop infinito sin saltos
+    // Al mover exactamente el 50%, cuando se reinicia la animación es imperceptible
     const duplicatedImages = [...reviewImages, ...reviewImages];
 
     return (
@@ -28,7 +29,7 @@ const ReviewsCarousel = () => {
             </h2>
 
             <div className="relative overflow-hidden">
-                <div className="flex gap-4 animate-scroll">
+                <div className="flex gap-4 animate-scroll-infinite" style={{ width: 'fit-content' }}>
                     {duplicatedImages.map((src, index) => (
                         <div key={`review-${index}`} className="flex-shrink-0 w-[200px] md:w-[250px]">
                             <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl">
