@@ -3,7 +3,9 @@ import "./globals.css";
 import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { CartProvider } from "@/context/CartContext";
+
 
 export const metadata: Metadata = {
   title: "Cockpit UY | Lideres en Simracing",
@@ -25,6 +27,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <WhatsAppButton />
         </CartProvider>
       </body>
     </html>

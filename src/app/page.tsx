@@ -3,6 +3,7 @@ import ProductGrid from '@/components/product/ProductGrid';
 import FeaturedSection from '@/components/home/FeaturedSection';
 import ReviewsCarousel from '@/components/home/ReviewsCarousel';
 import StatsStrip from '@/components/home/StatsStrip';
+import PickupSection from '@/components/home/PickupSection';
 import { getProductsByCollection } from '@/lib/shopify';
 
 export default async function Home() {
@@ -22,6 +23,8 @@ export default async function Home() {
       <ReviewsCarousel />
 
       <StatsStrip />
+
+      <PickupSection />
     </div>
   );
 }

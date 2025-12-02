@@ -10,7 +10,7 @@ const HeroSection = () => {
                 <div className="flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 py-12 z-10 relative">
                     <div className="mb-6 relative w-64 h-24">
                         <Image
-                            src="/logomain.png"
+                            src="/geminilogo2.png"
                             alt="Cockpit UY Logo"
                             fill
                             className="object-contain object-left"

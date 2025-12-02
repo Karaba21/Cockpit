@@ -37,11 +37,17 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center space-x-8">
-                    <Link href="/" className="text-foreground hover:text-primary transition-all duration-300 font-medium uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                    <Link href="/" className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                         Home
                     </Link>
-                    <Link href="/catalogo" className="text-foreground hover:text-primary transition-all duration-300 font-medium uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                    <Link href="/catalogo" className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                         Catalogo
+                    </Link>
+                    <Link href="/#reviews" className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                        Reseñas
+                    </Link>
+                    <Link href="/#pickup" className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                        Pickup
                     </Link>
                 </nav>
 
@@ -67,17 +73,24 @@ const Navbar = () => {
                 <div className="md:hidden glass-effect border-t border-border absolute w-full left-0 top-20 p-4 flex flex-col space-y-4 shadow-xl backdrop-blur-md">
                     <Link
                         href="/"
-                        className="text-foreground hover:text-primary transition-all duration-300 font-medium uppercase py-2 border-b border-border hover:pl-2"
+                        className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase py-2 border-b border-border hover:pl-2"
                         onClick={() => setIsMenuOpen(false)}
                     >
                         Home
                     </Link>
                     <Link
                         href="/catalogo"
-                        className="text-foreground hover:text-primary transition-all duration-300 font-medium uppercase py-2 border-b border-border hover:pl-2"
+                        className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase py-2 border-b border-border hover:pl-2"
                         onClick={() => setIsMenuOpen(false)}
                     >
                         Catalogo
+                    </Link>
+                    <Link
+                        href="/#pickup"
+                        className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase py-2 border-b border-border hover:pl-2"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Pickup
                     </Link>
                     <div className="flex items-center space-x-6 pt-2">
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110">

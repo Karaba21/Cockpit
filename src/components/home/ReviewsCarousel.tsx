@@ -1,34 +1,48 @@
 'use client';
 
 import React from 'react';
-import { Star } from 'lucide-react';
+import Image from 'next/image';
+
+const reviewImages = [
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.47.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.49.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.52.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.56.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.58 (1).jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.58.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.01.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.04.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.07 (1).jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.07.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.08.jpeg',
+];
 
 const ReviewsCarousel = () => {
-    // Mock reviews
-    const reviews = [
-        { id: 1, name: "Juan P.", text: "Excelente calidad y atención. El cockpit cambió totalmente mi experiencia.", rating: 5 },
-        { id: 2, name: "Martin S.", text: "Muy recomendados. El envío fue rápido y todo llegó perfecto.", rating: 5 },
-        { id: 3, name: "Diego M.", text: "Los mejores precios del mercado. Sin duda volveré a comprar.", rating: 5 },
-    ];
+    // Duplicamos las imágenes para crear un loop infinito sin saltos
+    const duplicatedImages = [...reviewImages, ...reviewImages];
 
     return (
-        <section className="py-16 container mx-auto px-4">
+        <section id="reviews" className="py-16 container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold italic tracking-tighter mb-12 text-center uppercase">
                 RESEÑAS
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {reviews.map((review) => (
-                    <div key={review.id} className="bg-surface-light p-8 rounded-lg border border-border shadow-lg">
-                        <div className="flex mb-4 text-primary">
-                            {[...Array(review.rating)].map((_, i) => (
-                                <Star key={i} size={20} fill="currentColor" />
-                            ))}
+            <div className="relative overflow-hidden">
+                <div className="flex gap-4 animate-scroll">
+                    {duplicatedImages.map((src, index) => (
+                        <div key={`review-${index}`} className="flex-shrink-0 w-[200px] md:w-[250px]">
+                            <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+                                <Image
+                                    src={src}
+                                    alt={`Reseña cliente ${(index % reviewImages.length) + 1}`}
+                                    fill
+                                    className="object-cover"
+                                    sizes="250px"
+                                />
+                            </div>
                         </div>
-                        <p className="text-gray-300 mb-6 italic">"{review.text}"</p>
-                        <p className="font-bold text-white uppercase tracking-wide">- {review.name}</p>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </section>
     );
