@@ -1,34 +1,52 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const HeroSection = () => {
     return (
-        <section className="relative h-[600px] w-full flex items-center justify-center overflow-hidden">
-            {/* Background Image Placeholder */}
-            <div className="absolute inset-0 bg-surface-light">
-                {/* Replace with actual image */}
-                <div className="w-full h-full bg-gradient-to-b from-asfalto/30 via-negro/80 to-negro z-10 absolute" />
-                <div
-                    className="w-full h-full bg-cover bg-center opacity-40"
-                    style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1547754980-3df97fed72a8?auto=format&fit=crop&q=80)' }} // Simracing/Gaming placeholder
-                ></div>
-            </div>
+        <section className="relative w-full bg-black overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 min-h-[600px]">
+                {/* Left Content */}
+                <div className="flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 py-12 z-10 relative">
+                    <div className="mb-6 relative w-64 h-24">
+                        <Image
+                            src="/logomain.png"
+                            alt="Cockpit UY Logo"
+                            fill
+                            className="object-contain object-left"
+                            priority
+                        />
+                    </div>
 
-            {/* Content */}
-            <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-                <h1 className="text-5xl md:text-7xl font-bold italic tracking-tighter mb-4 text-white drop-shadow-[0_0_30px_rgba(246,146,30,0.3)]">
-                    COCKPIT UY
-                </h1>
-                <p className="text-xl md:text-2xl text-arena mb-8 font-light tracking-wide uppercase drop-shadow-lg">
-                    Lideres en simracing
-                </p>
-                <Link
-                    href="/catalogo"
-                    className="group relative inline-block bg-gradient-to-r from-primary to-primary-hover text-negro font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-[0_4px_20px_rgba(246,146,30,0.4)] hover:shadow-[0_0_30px_rgba(246,146,30,0.7)] uppercase tracking-wider overflow-hidden"
-                >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-                    <span className="relative z-10">Ver Catalogo</span>
-                </Link>
+                    <p className="text-xl md:text-2xl text-gray-300 mb-10 font-light">
+                        Lideres en simracing
+                    </p>
+
+                    <Link
+                        href="/catalogo"
+                        className="group relative inline-block bg-gradient-to-r from-primary to-primary-hover text-negro font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-[0_4px_20px_rgba(246,146,30,0.4)] hover:shadow-[0_0_30px_rgba(246,146,30,0.7)] uppercase tracking-wider overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                        <span className="relative z-10">Ver Catalogo</span>
+                    </Link>
+
+                    {/* Decorative element for "Soportes" if needed based on design, 
+                        but keeping it clean for now matching the main request */}
+                </div>
+
+                {/* Right Image */}
+                <div className="relative h-[400px] md:h-auto w-full">
+                    <Image
+                        src="/fotosim.png"
+                        alt="Simracing Setup"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    {/* Gradient overlay for better text readability if they overlap on mobile, 
+                        or just for style blending */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent md:bg-gradient-to-r md:from-black md:via-transparent md:to-transparent opacity-50 md:opacity-100 pointer-events-none" />
+                </div>
             </div>
         </section>
     );

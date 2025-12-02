@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, ShoppingCart, User, Facebook, Instagram } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+
+import SearchBar from '@/components/ui/SearchBar';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,10 +26,13 @@ const Navbar = () => {
 
                 {/* Logo */}
                 <Link href="/" className="flex-shrink-0">
-                    <div className="h-10 w-32 bg-white/10 flex items-center justify-center text-foreground font-bold italic tracking-tighter">
-                        {/* Placeholder for Logo */}
-                        COCKPIT UY
-                    </div>
+                    <Image
+                        src="/logocockpit.png"
+                        alt="Cockpit UY"
+                        width={120}
+                        height={40}
+                        className="h-10 w-auto object-contain"
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -41,18 +47,9 @@ const Navbar = () => {
 
                 {/* Actions */}
                 <div className="flex items-center space-x-4 md:space-x-6">
-                    <div className="hidden md:flex items-center space-x-4 border-r border-border pr-6">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
-                            <Facebook size={20} />
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
-                            <Instagram size={20} />
-                        </a>
+                    <div className="hidden md:block w-64">
+                        <SearchBar />
                     </div>
-
-                    <Link href="/account/login" className="text-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
-                        <User size={24} />
-                    </Link>
 
                     <Link href="/cart" className="relative text-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                         <ShoppingCart size={24} />
