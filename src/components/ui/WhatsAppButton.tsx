@@ -13,9 +13,6 @@ export default function WhatsAppButton() {
             aria-label="Contactar por WhatsApp"
         >
             <div className="relative">
-                {/* Pulsing ring effect */}
-                <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75 group-hover:opacity-0 transition-opacity"></div>
-
                 {/* Main button */}
                 <div className="relative bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all duration-300 transform group-hover:scale-110">
                     <svg 
