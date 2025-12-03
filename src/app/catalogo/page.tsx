@@ -10,7 +10,7 @@ const siteUrl = getSiteUrl();
 export async function generateMetadata({ searchParams }: CatalogPageProps): Promise<Metadata> {
     const resolvedSearchParams = await searchParams;
     const category = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : undefined;
-    
+
     const categoryNames: Record<string, string> = {
         soportes: 'Soportes',
         volantes: 'Volantes',
@@ -19,7 +19,7 @@ export async function generateMetadata({ searchParams }: CatalogPageProps): Prom
 
     const categoryName = category ? categoryNames[category] || category : 'Todos';
     const title = category ? `${categoryName} - Catálogo` : 'Catálogo Completo';
-    const description = category 
+    const description = category
         ? `Explora nuestra selección de ${categoryName.toLowerCase()} para simracing. Productos de calidad en Uruguay.`
         : 'Explora nuestro catálogo completo de productos para simracing. Soportes, volantes, mods y accesorios. Envíos a todo Uruguay.';
 
@@ -61,6 +61,22 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
     const products = category
         ? await getProductsByCollection(category)
         : await getAllProducts();
+
+    if (products.length > 0) {
+        console.log('Debug - First Product:', JSON.stringify({
+            title: products[0].title,
+            tags: products[0].tags,
+            productType: products[0].productType
+        }, null, 2));
+
+        // Log all unique tags to see what we have
+        const allTags = Array.from(new Set(products.flatMap(p => p.tags || [])));
+        console.log('Debug - All Tags:', allTags);
+
+        // Log all unique product types
+        const allTypes = Array.from(new Set(products.map(p => p.productType).filter(Boolean)));
+        console.log('Debug - All Product Types:', allTypes);
+    }
 
     const getButtonClass = (btnCategory?: string) => {
         const isActive = category === btnCategory;

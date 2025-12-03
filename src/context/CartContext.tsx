@@ -12,6 +12,7 @@ interface CartContextType {
     isCartOpen: boolean;
     setIsCartOpen: (isOpen: boolean) => void;
     getCheckoutUrl: () => Promise<string | null>;
+    buyNow: (product: Product) => Promise<string | null>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -191,6 +192,70 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     };
 
+    const buyNow = async (product: Product): Promise<string | null> => {
+        if (!product.variantId) {
+            console.error('Product missing variantId');
+            return null;
+        }
+
+        // Add to local state (optional, but good for consistency if user comes back)
+        setItems((prev) => {
+            const existing = prev.find((item) => item.id === product.id);
+            if (existing) {
+                return prev.map((item) =>
+                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                );
+            }
+            return [...prev, { ...product, quantity: 1 }];
+        });
+
+        try {
+            if (!shopifyCartId) {
+                // Create new cart with just this item
+                const response = await fetch('/api/cart/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        merchandiseId: product.variantId,
+                        quantity: 1,
+                    }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    setShopifyCartId(result.cartId);
+                    return result.checkoutUrl;
+                }
+            } else {
+                // Add to existing cart
+                await fetch('/api/cart/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        cartId: shopifyCartId,
+                        merchandiseId: product.variantId,
+                        quantity: 1,
+                    }),
+                });
+
+                // Get checkout URL
+                const response = await fetch('/api/cart/get', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cartId: shopifyCartId }),
+                });
+
+                if (response.ok) {
+                    const cart = await response.json();
+                    return cart?.checkoutUrl || null;
+                }
+            }
+        } catch (error) {
+            console.error('Error in buyNow:', error);
+        }
+        return null;
+    };
+
     const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
@@ -204,6 +269,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 isCartOpen,
                 setIsCartOpen,
                 getCheckoutUrl,
+                buyNow,
             }}
         >
             {children}

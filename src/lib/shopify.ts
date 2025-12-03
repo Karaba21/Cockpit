@@ -57,7 +57,9 @@ function normalizeProduct(shopifyProduct: any): Product {
       altText: edge.node.altText || shopifyProduct.title,
     })),
     tags: shopifyProduct.tags,
+    productType: shopifyProduct.productType,
     variantId: variant?.id,
+    collections: shopifyProduct.collections?.edges.map((edge: any) => edge.node.handle) || [],
   };
 }
 
@@ -72,6 +74,14 @@ const COLLECTION_QUERY = `
             title
             description
             tags
+            productType
+            collections(first: 5) {
+              edges {
+                node {
+                  handle
+                }
+              }
+            }
             images(first: 5) {
               edges {
                 node {
@@ -108,6 +118,14 @@ const PRODUCT_QUERY = `
       title
       description
       tags
+      productType
+      collections(first: 5) {
+        edges {
+          node {
+            handle
+          }
+        }
+      }
       images(first: 10) {
         edges {
           node {
@@ -143,6 +161,14 @@ const ALL_PRODUCTS_QUERY = `
           title
           description
           tags
+          productType
+          collections(first: 5) {
+            edges {
+              node {
+                handle
+              }
+            }
+          }
           images(first: 5) {
             edges {
               node {
@@ -231,6 +257,14 @@ const SEARCH_QUERY = `
             title
             description
             tags
+            productType
+            collections(first: 5) {
+              edges {
+                node {
+                  handle
+                }
+              }
+            }
             images(first: 5) {
               edges {
                 node {

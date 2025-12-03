@@ -10,7 +10,9 @@ export interface Product {
         altText: string;
     }[];
     tags?: string[];
+    productType?: string;
     variantId?: string; // Shopify variant ID for cart operations
+    collections?: string[];
 }
 
 export interface CartItem extends Product {
