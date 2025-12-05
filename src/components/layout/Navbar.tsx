@@ -13,7 +13,7 @@ const Navbar = () => {
     const { cartCount } = useCart();
 
     return (
-        <header className="glass-effect border-b border-border sticky top-0 z-50 backdrop-blur-md">
+        <header className="bg-black sticky top-0 z-50">
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">
                 {/* Mobile Menu Button */}
                 <button
@@ -70,7 +70,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="md:hidden glass-effect border-t border-border absolute w-full left-0 top-20 p-4 flex flex-col space-y-4 shadow-xl backdrop-blur-md">
+                <div className="md:hidden bg-black absolute w-full left-0 top-20 p-4 flex flex-col space-y-4 shadow-xl">
                     <Link
                         href="/"
                         className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase py-2 border-b border-border hover:pl-2"

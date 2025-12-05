@@ -421,18 +421,13 @@ const CART_QUERY = `
   }
 `;
 
-export async function createCart(merchandiseId: string, quantity: number = 1): Promise<{ cartId: string; checkoutUrl: string } | null> {
+export async function createCart(lines: { merchandiseId: string; quantity: number }[]): Promise<{ cartId: string; checkoutUrl: string } | null> {
   try {
     const data = await shopifyFetch<{ cartCreate: { cart: any; userErrors: any[] } }>({
       query: CART_CREATE_MUTATION,
       variables: {
         input: {
-          lines: [
-            {
-              merchandiseId,
-              quantity,
-            },
-          ],
+          lines,
         },
       },
     });

@@ -72,8 +72,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        merchandiseId: product.variantId,
-                        quantity: 1,
+                        lines: [
+                            {
+                                merchandiseId: product.variantId,
+                                quantity: 1,
+                            },
+                        ],
                     }),
                 });
 
@@ -115,79 +119,34 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const getCheckoutUrl = async (): Promise<string | null> => {
-        // If no Shopify cart exists, create one with all current items
-        if (!shopifyCartId) {
-            console.log('No Shopify cart ID found, creating new cart...');
-
-            if (items.length === 0) {
-                console.error('Cannot create cart: no items');
-                return null;
-            }
-
-            try {
-                // Create cart with first item via API
-                const firstItem = items[0];
-                if (!firstItem.variantId) {
-                    console.error('First item missing variantId');
-                    return null;
-                }
-
-                const createResponse = await fetch('/api/cart/create', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        merchandiseId: firstItem.variantId,
-                        quantity: firstItem.quantity,
-                    }),
-                });
-
-                if (!createResponse.ok) {
-                    console.error('Failed to create cart');
-                    return null;
-                }
-
-                const result = await createResponse.json();
-                setShopifyCartId(result.cartId);
-
-                // Add remaining items to the cart
-                for (let i = 1; i < items.length; i++) {
-                    const item = items[i];
-                    if (item.variantId) {
-                        await fetch('/api/cart/add', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                cartId: result.cartId,
-                                merchandiseId: item.variantId,
-                                quantity: item.quantity,
-                            }),
-                        });
-                    }
-                }
-
-                return result.checkoutUrl;
-            } catch (error) {
-                console.error('Error creating cart for checkout:', error);
-                return null;
-            }
+        if (items.length === 0) {
+            return null;
         }
 
-        // If cart exists, fetch the checkout URL via API
         try {
-            const response = await fetch('/api/cart/get', {
+            // Always create a new cart to ensure sync with local state
+            const lines = items.map((item) => ({
+                merchandiseId: item.variantId!,
+                quantity: item.quantity,
+            }));
+
+            const response = await fetch('/api/cart/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cartId: shopifyCartId }),
+                body: JSON.stringify({ lines }),
             });
 
             if (!response.ok) {
+                console.error('Failed to create cart for checkout');
                 return null;
             }
 
-            const cart = await response.json();
-            return cart?.checkoutUrl || null;
+            const result = await response.json();
+            // Don't save the cart ID - we want a fresh cart each time
+            // This prevents issues when user returns from Shopify checkout
+            return result.checkoutUrl;
         } catch (error) {
-            console.error('Error fetching checkout URL:', error);
+            console.error('Error creating cart for checkout:', error);
             return null;
         }
     };
@@ -216,8 +175,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        merchandiseId: product.variantId,
-                        quantity: 1,
+                        lines: [
+                            {
+                                merchandiseId: product.variantId,
+                                quantity: 1,
+                            },
+                        ],
                     }),
                 });
 

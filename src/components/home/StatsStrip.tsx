@@ -2,9 +2,9 @@ import React from 'react';
 
 const StatsStrip = () => {
     return (
-        <section className="py-12 bg-primary text-surface">
+        <section className="py-6 bg-primary text-surface">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-24 text-center">
+                <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-center items-center gap-8 md:gap-24 text-center">
                     <div>
                         <h3 className="text-4xl md:text-5xl font-black italic tracking-tighter mb-2">
                             +200

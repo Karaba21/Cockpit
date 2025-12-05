@@ -93,7 +93,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             </h1>
 
             {/* Filters */}
-            <div className="flex justify-center mb-12 space-x-4">
+            <div className="flex justify-center mb-12 space-x-2 px-4">
                 <Link href="/catalogo" className={getButtonClass(undefined)}>
                     Todos
                 </Link>

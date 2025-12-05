@@ -3,16 +3,25 @@ import { createCart } from '@/lib/shopify';
 
 export async function POST(request: NextRequest) {
     try {
-        const { merchandiseId, quantity } = await request.json();
+        const body = await request.json();
+        let lines = body.lines;
 
-        if (!merchandiseId) {
+        // Support legacy single item format
+        if (!lines && body.merchandiseId) {
+            lines = [{
+                merchandiseId: body.merchandiseId,
+                quantity: body.quantity || 1
+            }];
+        }
+
+        if (!lines || lines.length === 0) {
             return NextResponse.json(
-                { error: 'merchandiseId is required' },
+                { error: 'lines or merchandiseId is required' },
                 { status: 400 }
             );
         }
 
-        const result = await createCart(merchandiseId, quantity || 1);
+        const result = await createCart(lines);
 
         if (!result) {
             return NextResponse.json(

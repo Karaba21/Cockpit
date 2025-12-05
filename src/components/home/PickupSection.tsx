@@ -6,16 +6,13 @@ const PickupSection = () => {
     return (
         <section id="pickup" className="py-16 bg-surface border-t border-asfalto">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl md:text-4xl font-bold italic tracking-tighter mb-12 text-center text-primary">
-                    Pickup
+                <h2 className="text-6xl md:text-6xl font-bold italic tracking-tighter mb-12 text-center text-primary">
+                    PICKUP
                 </h2>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Left Side - Location Information */}
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-bold italic text-foreground mb-6">
-                            Cockpit UY
-                        </h3>
 
                         {/* Address */}
                         <div className="flex items-start space-x-4 group">
@@ -38,10 +35,10 @@ const PickupSection = () => {
                             <div>
                                 <h4 className="font-bold text-foreground mb-1">Teléfono</h4>
                                 <a
-                                    href="tel:+59899493618"
+                                    href="tel:+59893474177"
                                     className="text-arena text-sm hover:text-primary transition-all duration-300"
                                 >
-                                    +598 ...
+                                    +598 93474177
                                 </a>
                             </div>
                         </div>
@@ -54,10 +51,10 @@ const PickupSection = () => {
                             <div>
                                 <h4 className="font-bold text-foreground mb-1">Email</h4>
                                 <a
-                                    href="mailto:gp.automoviles@gmail.com"
+                                    href="mailto:cockpituy@gmail.com"
                                     className="text-arena text-sm hover:text-primary transition-all duration-300"
                                 >
-                                    ...@gmail.com
+                                    cockpituy@gmail.com
                                 </a>
                             </div>
                         </div>
