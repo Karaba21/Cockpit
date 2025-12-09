@@ -23,7 +23,7 @@ const ReviewsCarousel = () => {
     const duplicatedImages = [...reviewImages, ...reviewImages];
 
     return (
-        <section id="reviews" className="py-16 container mx-auto px-4">
+        <section id="reviews" className="scroll-mt-24 py-16 container mx-auto px-4">
             <h2 className="text-6xl md:text-6xl font-bold italic tracking-tighter mb-12 text-center text-primary">
                 RESEÑAS
             </h2>

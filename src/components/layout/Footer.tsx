@@ -29,6 +29,8 @@ const Footer = () => {
                         <ul className="space-y-2 text-sm text-arena">
                             <li><Link href="/" className="hover:text-primary transition-all duration-300 hover:pl-1">Home</Link></li>
                             <li><Link href="/catalogo" className="hover:text-primary transition-all duration-300 hover:pl-1">Catalogo</Link></li>
+                            <li><Link href="#reviews" className="hover:text-primary transition-all duration-300 hover:pl-1">Reviews</Link></li>
+                            <li><Link href="#pickup" className="hover:text-primary transition-all duration-300 hover:pl-1">Pickup</Link></li>
                             <li><Link href="/cart" className="hover:text-primary transition-all duration-300 hover:pl-1">Carrito</Link></li>
                         </ul>
                     </div>
@@ -46,7 +48,7 @@ const Footer = () => {
                     {/* Newsletter / Contact placeholder */}
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Contacto</h4>
-                        <p className="text-sm text-arena mb-2">¿Tienes dudas?</p>
+                        <p className="text-sm text-arena mb-2">¿Tenes dudas?</p>
                         <a href="mailto:contacto@cockpituy.store" className="text-primary hover:underline text-sm hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)] transition-all duration-300">
                             contacto@cockpituy.store
                         </a>
