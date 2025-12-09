@@ -57,9 +57,15 @@ const FeaturedSection = async () => {
                         <h2 className="text-3xl md:text-5xl font-bold italic tracking-tighter mb-6 uppercase">
                             Iniciate con el mejor volante del mercado
                         </h2>
-                        <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                            {product.description || 'Descubre la experiencia definitiva de simracing con nuestra selección de volantes de alta gama. Precisión, realismo y durabilidad para llevar tu conducción al siguiente nivel.'}
-                        </p>
+                        <div className="text-gray-400 text-lg mb-8 leading-relaxed prose prose-invert">
+                            {product.descriptionHtml ? (
+                                <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+                            ) : (
+                                <p className="whitespace-pre-line">
+                                    {product.description || 'Descubre la experiencia definitiva de simracing con nuestra selección de volantes de alta gama. Precisión, realismo y durabilidad para llevar tu conducción al siguiente nivel.'}
+                                </p>
+                            )}
+                        </div>
                         <a
                             href="https://cockpituy.com/producto/logitech-g29"
                             className="inline-block bg-primary hover:bg-primary-hover text-surface font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg uppercase tracking-wider"

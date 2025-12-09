@@ -50,6 +50,7 @@ function normalizeProduct(shopifyProduct: any): Product {
     handle: shopifyProduct.handle,
     title: shopifyProduct.title,
     description: shopifyProduct.description || '',
+    descriptionHtml: shopifyProduct.descriptionHtml || '',
     price: parseFloat(variant?.price?.amount || '0'),
     compareAtPrice: variant?.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : undefined,
     images: shopifyProduct.images.edges.map((edge: any) => ({
@@ -73,6 +74,7 @@ const COLLECTION_QUERY = `
             handle
             title
             description
+            descriptionHtml
             tags
             productType
             collections(first: 5) {
@@ -117,6 +119,7 @@ const PRODUCT_QUERY = `
       handle
       title
       description
+      descriptionHtml
       tags
       productType
       collections(first: 5) {
@@ -160,6 +163,7 @@ const ALL_PRODUCTS_QUERY = `
           handle
           title
           description
+          descriptionHtml
           tags
           productType
           collections(first: 5) {
@@ -256,6 +260,7 @@ const SEARCH_QUERY = `
             handle
             title
             description
+            descriptionHtml
             tags
             productType
             collections(first: 5) {

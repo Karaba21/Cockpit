@@ -3,6 +3,7 @@ export interface Product {
     handle: string;
     title: string;
     description: string;
+    descriptionHtml?: string;
     price: number;
     compareAtPrice?: number;
     images: {
