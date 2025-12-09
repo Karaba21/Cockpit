@@ -86,6 +86,13 @@ const Navbar = () => {
                         Catalogo
                     </Link>
                     <Link
+                        href="/#reviews"
+                        className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase py-2 border-b border-border hover:pl-2"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Reseñas
+                    </Link>
+                    <Link
                         href="/#pickup"
                         className="text-foreground hover:text-primary transition-all duration-300 font-bold italic uppercase py-2 border-b border-border hover:pl-2"
                         onClick={() => setIsMenuOpen(false)}
@@ -93,11 +100,11 @@ const Navbar = () => {
                         Pickup
                     </Link>
                     <div className="flex items-center space-x-6 pt-2">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110">
-                            <Facebook size={24} />
+                        <a href="https://facebook.com/cockpituy" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                            <Facebook size={20} />
                         </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110">
-                            <Instagram size={24} />
+                        <a href="https://www.instagram.com/cockpit.uy" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                            <Instagram size={20} />
                         </a>
                     </div>
                 </div>
