@@ -58,21 +58,6 @@ const PickupSection = () => {
                                 </a>
                             </div>
                         </div>
-
-                        {/* Hours */}
-                        <div className="flex items-start space-x-4 group">
-                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
-                                <Clock className="text-primary" size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-foreground mb-1">Horarios</h4>
-                                <div className="text-arena text-sm space-y-1">
-                                    <p>Lunes - Viernes: 8:00 - 19:00</p>
-                                    <p>Sábados: 8:00 - 17:00 PM</p>
-                                    <p>Domingos: Con previa agenda</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Right Side - Map Image */}

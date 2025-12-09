@@ -169,49 +169,36 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
 
         try {
-            if (!shopifyCartId) {
-                // Create new cart with just this item
-                const response = await fetch('/api/cart/create', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        lines: [
-                            {
-                                merchandiseId: product.variantId,
-                                quantity: 1,
-                            },
-                        ],
-                    }),
-                });
+            // Create a temporary updated items list for the checkout
+            // We can't rely on 'items' state immediately as the setter is async/batched
+            const updatedItems = [...items];
+            const existingIndex = updatedItems.findIndex((item) => item.id === product.id);
 
-                if (response.ok) {
-                    const result = await response.json();
-                    setShopifyCartId(result.cartId);
-                    return result.checkoutUrl;
-                }
+            if (existingIndex >= 0) {
+                updatedItems[existingIndex] = {
+                    ...updatedItems[existingIndex],
+                    quantity: updatedItems[existingIndex].quantity + 1
+                };
             } else {
-                // Add to existing cart
-                await fetch('/api/cart/add', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        cartId: shopifyCartId,
-                        merchandiseId: product.variantId,
-                        quantity: 1,
-                    }),
-                });
+                updatedItems.push({ ...product, quantity: 1 });
+            }
 
-                // Get checkout URL
-                const response = await fetch('/api/cart/get', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ cartId: shopifyCartId }),
-                });
+            // Always create a new cart for "Buy Now" to ensure sync
+            // This mirrors getCheckoutUrl logic and prevents "ghost items" from stale sessions
+            const lines = updatedItems.map((item) => ({
+                merchandiseId: item.variantId!,
+                quantity: item.quantity,
+            }));
 
-                if (response.ok) {
-                    const cart = await response.json();
-                    return cart?.checkoutUrl || null;
-                }
+            const response = await fetch('/api/cart/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lines }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                return result.checkoutUrl;
             }
         } catch (error) {
             console.error('Error in buyNow:', error);

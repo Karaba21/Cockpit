@@ -14,10 +14,10 @@ const Footer = () => {
                             Lideres en simracing en Uruguay.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="https://facebook.com" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                            <a href="https://www.facebook.com/cockpituy" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                                 <Facebook size={20} />
                             </a>
-                            <a href="https://instagram.com" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                            <a href="https://www.instagram.com/cockpit.uy/" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                                 <Instagram size={20} />
                             </a>
                         </div>
@@ -37,9 +37,9 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Legal</h4>
                         <ul className="space-y-2 text-sm text-arena">
-                            <li><Link href="/policies/privacy-policy" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de privacidad</Link></li>
-                            <li><Link href="/policies/refund-policy" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de reembolso</Link></li>
-                            <li><Link href="/policies/terms-of-service" className="hover:text-primary transition-all duration-300 hover:pl-1">Términos del servicio</Link></li>
+                            <li><Link href="/politica-de-privacidad" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de privacidad</Link></li>
+                            <li><Link href="/politica-de-reembolso" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de reembolso</Link></li>
+                            <li><Link href="/terminos-del-servicio" className="hover:text-primary transition-all duration-300 hover:pl-1">Términos del servicio</Link></li>
                         </ul>
                     </div>
 
