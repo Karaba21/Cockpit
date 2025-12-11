@@ -1,4 +1,6 @@
 import HeroSection from '@/components/home/HeroSection';
+import Link from 'next/link';
+import Image from 'next/image';
 import ProductGrid from '@/components/product/ProductGrid';
 import FeaturedSection from '@/components/home/FeaturedSection';
 import ReviewsCarousel from '@/components/home/ReviewsCarousel';
@@ -48,7 +50,21 @@ export default async function Home() {
 
       <ProductGrid title="Soportes" products={soportes} />
 
-      <ProductGrid title="Volantes y mods" products={volantesMods} />
+      <ProductGrid
+        title="Volantes y mods"
+        products={volantesMods}
+        headerContent={
+          <Link href="/catalogo" className="block transition-transform hover:scale-[1.02] duration-300">
+            <Image
+              src="/volantesymods.png"
+              alt="Volantes y mods"
+              width={1600}
+              height={400}
+              className="w-full max-w-7xl h-auto object-cover rounded-xl shadow-lg hover:shadow-[0_0_40px_rgba(249,115,22,0.5)] transition-all duration-300 border-2 border-transparent hover:border-orange-500"
+            />
+          </Link>
+        }
+      />
 
       <ReviewsCarousel />
 
