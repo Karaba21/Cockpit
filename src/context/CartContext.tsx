@@ -72,8 +72,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        merchandiseId: product.variantId,
-                        quantity: 1,
+                        lines: [{
+                            merchandiseId: product.variantId,
+                            quantity: 1,
+                        }]
                     }),
                 });
 
@@ -115,79 +117,35 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const getCheckoutUrl = async (): Promise<string | null> => {
-        // If no Shopify cart exists, create one with all current items
-        if (!shopifyCartId) {
-            console.log('No Shopify cart ID found, creating new cart...');
-
-            if (items.length === 0) {
-                console.error('Cannot create cart: no items');
-                return null;
-            }
-
-            try {
-                // Create cart with first item via API
-                const firstItem = items[0];
-                if (!firstItem.variantId) {
-                    console.error('First item missing variantId');
-                    return null;
-                }
-
-                const createResponse = await fetch('/api/cart/create', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        merchandiseId: firstItem.variantId,
-                        quantity: firstItem.quantity,
-                    }),
-                });
-
-                if (!createResponse.ok) {
-                    console.error('Failed to create cart');
-                    return null;
-                }
-
-                const result = await createResponse.json();
-                setShopifyCartId(result.cartId);
-
-                // Add remaining items to the cart
-                for (let i = 1; i < items.length; i++) {
-                    const item = items[i];
-                    if (item.variantId) {
-                        await fetch('/api/cart/add', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                cartId: result.cartId,
-                                merchandiseId: item.variantId,
-                                quantity: item.quantity,
-                            }),
-                        });
-                    }
-                }
-
-                return result.checkoutUrl;
-            } catch (error) {
-                console.error('Error creating cart for checkout:', error);
-                return null;
-            }
+        if (items.length === 0) {
+            return null;
         }
 
-        // If cart exists, fetch the checkout URL via API
         try {
-            const response = await fetch('/api/cart/get', {
+            console.log('Creating fresh checkout for items:', items);
+            // Always create a fresh cart for checkout to ensure it matches local state exactly
+            const lines = items.map(item => ({
+                merchandiseId: item.variantId,
+                quantity: item.quantity
+            }));
+
+            const response = await fetch('/api/cart/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cartId: shopifyCartId }),
+                body: JSON.stringify({ lines }),
             });
 
             if (!response.ok) {
+                console.error('Failed to create checkout cart');
                 return null;
             }
 
-            const cart = await response.json();
-            return cart?.checkoutUrl || null;
+            const result = await response.json();
+            // Update the stored cart ID to this new valid one
+            setShopifyCartId(result.cartId);
+            return result.checkoutUrl;
         } catch (error) {
-            console.error('Error fetching checkout URL:', error);
+            console.error('Error creating checkout:', error);
             return null;
         }
     };
@@ -198,62 +156,48 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             return null;
         }
 
-        // Add to local state (optional, but good for consistency if user comes back)
-        setItems((prev) => {
-            const existing = prev.find((item) => item.id === product.id);
-            if (existing) {
-                return prev.map((item) =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-                );
-            }
-            return [...prev, { ...product, quantity: 1 }];
-        });
+        // 1. Calculate the new state with this item added
+        const newItems = [...items];
+        const existingIndex = newItems.findIndex((item) => item.id === product.id);
+        if (existingIndex >= 0) {
+            newItems[existingIndex] = {
+                ...newItems[existingIndex],
+                quantity: newItems[existingIndex].quantity + 1
+            };
+        } else {
+            newItems.push({ ...product, quantity: 1 });
+        }
 
+        // 2. Update local state
+        setItems(newItems);
+
+        // 3. Create a fresh checkout with these items
         try {
-            if (!shopifyCartId) {
-                // Create new cart with just this item
-                const response = await fetch('/api/cart/create', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        merchandiseId: product.variantId,
-                        quantity: 1,
-                    }),
-                });
+            console.log('Creating fresh buyNow checkout for items:', newItems);
+            const lines = newItems.map(item => ({
+                merchandiseId: item.variantId,
+                quantity: item.quantity
+            }));
 
-                if (response.ok) {
-                    const result = await response.json();
-                    setShopifyCartId(result.cartId);
-                    return result.checkoutUrl;
-                }
-            } else {
-                // Add to existing cart
-                await fetch('/api/cart/add', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        cartId: shopifyCartId,
-                        merchandiseId: product.variantId,
-                        quantity: 1,
-                    }),
-                });
+            const response = await fetch('/api/cart/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lines }),
+            });
 
-                // Get checkout URL
-                const response = await fetch('/api/cart/get', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ cartId: shopifyCartId }),
-                });
-
-                if (response.ok) {
-                    const cart = await response.json();
-                    return cart?.checkoutUrl || null;
-                }
+            if (!response.ok) {
+                console.error('Failed to create buyNow cart');
+                return null;
             }
+
+            const result = await response.json();
+            setShopifyCartId(result.cartId);
+            return result.checkoutUrl;
+
         } catch (error) {
             console.error('Error in buyNow:', error);
+            return null;
         }
-        return null;
     };
 
     const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);

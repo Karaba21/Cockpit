@@ -50,6 +50,7 @@ function normalizeProduct(shopifyProduct: any): Product {
     handle: shopifyProduct.handle,
     title: shopifyProduct.title,
     description: shopifyProduct.description || '',
+    descriptionHtml: shopifyProduct.descriptionHtml || '',
     price: parseFloat(variant?.price?.amount || '0'),
     compareAtPrice: variant?.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : undefined,
     images: shopifyProduct.images.edges.map((edge: any) => ({
@@ -60,6 +61,18 @@ function normalizeProduct(shopifyProduct: any): Product {
     productType: shopifyProduct.productType,
     variantId: variant?.id,
     collections: shopifyProduct.collections?.edges.map((edge: any) => edge.node.handle) || [],
+    options: shopifyProduct.options?.map((option: any) => ({
+      id: option.id,
+      name: option.name,
+      values: option.values,
+    })) || [],
+    variants: shopifyProduct.variants.edges.map((edge: any) => ({
+      id: edge.node.id,
+      title: edge.node.title,
+      availableForSale: edge.node.availableForSale,
+      selectedOptions: edge.node.selectedOptions,
+      price: edge.node.price,
+    })) || [],
   };
 }
 
@@ -90,15 +103,28 @@ const COLLECTION_QUERY = `
                 }
               }
             }
-            variants(first: 1) {
+            options {
+              id
+              name
+              values
+            }
+            variants(first: 250) {
               edges {
                 node {
                   id
+                  title
+                  availableForSale
+                  selectedOptions {
+                    name
+                    value
+                  }
                   price {
                     amount
+                    currencyCode
                   }
                   compareAtPrice {
                     amount
+                    currencyCode
                   }
                 }
               }
@@ -117,6 +143,7 @@ const PRODUCT_QUERY = `
       handle
       title
       description
+      descriptionHtml
       tags
       productType
       collections(first: 5) {
@@ -134,15 +161,28 @@ const PRODUCT_QUERY = `
           }
         }
       }
-      variants(first: 1) {
+      options {
+        id
+        name
+        values
+      }
+      variants(first: 250) {
         edges {
           node {
             id
+            title
+            availableForSale
+            selectedOptions {
+              name
+              value
+            }
             price {
               amount
+              currencyCode
             }
             compareAtPrice {
               amount
+              currencyCode
             }
           }
         }
@@ -160,6 +200,7 @@ const ALL_PRODUCTS_QUERY = `
           handle
           title
           description
+          descriptionHtml
           tags
           productType
           collections(first: 5) {
@@ -177,15 +218,28 @@ const ALL_PRODUCTS_QUERY = `
               }
             }
           }
-          variants(first: 1) {
+          options {
+            id
+            name
+            values
+          }
+          variants(first: 250) {
             edges {
               node {
                 id
+                title
+                availableForSale
+                selectedOptions {
+                  name
+                  value
+                }
                 price {
                   amount
+                  currencyCode
                 }
                 compareAtPrice {
                   amount
+                  currencyCode
                 }
               }
             }
@@ -273,15 +327,28 @@ const SEARCH_QUERY = `
                 }
               }
             }
-            variants(first: 1) {
+            options {
+              id
+              name
+              values
+            }
+            variants(first: 250) {
               edges {
                 node {
                   id
+                  title
+                  availableForSale
+                  selectedOptions {
+                    name
+                    value
+                  }
                   price {
                     amount
+                    currencyCode
                   }
                   compareAtPrice {
                     amount
+                    currencyCode
                   }
                 }
               }
@@ -421,18 +488,13 @@ const CART_QUERY = `
   }
 `;
 
-export async function createCart(merchandiseId: string, quantity: number = 1): Promise<{ cartId: string; checkoutUrl: string } | null> {
+export async function createCart(lines: { merchandiseId: string; quantity: number }[]): Promise<{ cartId: string; checkoutUrl: string } | null> {
   try {
     const data = await shopifyFetch<{ cartCreate: { cart: any; userErrors: any[] } }>({
       query: CART_CREATE_MUTATION,
       variables: {
         input: {
-          lines: [
-            {
-              merchandiseId,
-              quantity,
-            },
-          ],
+          lines,
         },
       },
     });
