@@ -21,7 +21,7 @@ const PickupSection = () => {
                             </div>
                             <div>
                                 <h4 className="font-bold text-foreground mb-1">Dirección</h4>
-                                <p className="text-arena text-sm">
+                                <p className="text-arena text-lg">
                                     Carrasco Norte, Montevideo
                                 </p>
                             </div>
@@ -36,7 +36,7 @@ const PickupSection = () => {
                                 <h4 className="font-bold text-foreground mb-1">Teléfono</h4>
                                 <a
                                     href="tel:+59893474177"
-                                    className="text-arena text-sm hover:text-primary transition-all duration-300"
+                                    className="text-arena text-lg hover:text-primary transition-all duration-300"
                                 >
                                     +598 93474177
                                 </a>
@@ -52,7 +52,7 @@ const PickupSection = () => {
                                 <h4 className="font-bold text-foreground mb-1">Email</h4>
                                 <a
                                     href="mailto:cockpituy@gmail.com"
-                                    className="text-arena text-sm hover:text-primary transition-all duration-300"
+                                    className="text-arena text-lg hover:text-primary transition-all duration-300"
                                 >
                                     cockpituy@gmail.com
                                 </a>

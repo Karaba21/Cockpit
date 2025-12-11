@@ -16,8 +16,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const isOnSale = product.compareAtPrice && product.compareAtPrice > product.price;
 
     return (
-        <div className="group relative bg-surface-light rounded-lg overflow-hidden shadow-lg hover:shadow-[0_8px_30px_rgba(246,146,30,0.3)] transition-all duration-500 border border-asfalto hover:border-primary/70 before:absolute before:inset-0 before:rounded-lg before:p-[1px] before:bg-gradient-to-br before:from-asfalto before:via-primary/30 before:to-asfalto before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:-z-10">
-            <Link href={`/producto/${product.handle}`} className="block relative aspect-square overflow-hidden bg-white/5">
+        <div className="group relative bg-surface-light rounded-lg overflow-hidden shadow-lg hover:shadow-[0_8px_30px_rgba(246,146,30,0.3)] transition-all duration-500 border border-asfalto hover:border-primary/70 before:absolute before:inset-0 before:rounded-lg before:p-[1px] before:bg-gradient-to-br before:from-asfalto before:via-primary/30 before:to-asfalto before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:-z-10 h-full flex flex-col">
+            <Link href={`/producto/${product.handle}`} className="block relative aspect-square overflow-hidden bg-white/5 shrink-0">
                 {/* Image Placeholder */}
                 {product.images[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -40,14 +40,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 )}
             </Link>
 
-            <div className="p-4">
+            <div className="p-4 flex flex-col flex-1">
                 <h3 className="text-lg font-bold mb-0 line-clamp-2 h-14 group-hover:text-primary transition-colors">
                     <Link href={`/producto/${product.handle}`}>
                         {product.title}
                     </Link>
                 </h3>
 
-                <div className="-mt-2 flex items-end justify-between mb-4">
+                <div className="-mt-2 flex items-end justify-between mb-4 mt-auto">
                     <div className="flex flex-col">
                         {isOnSale && (
                             <span className="text-sm text-gray-400 line-through">
