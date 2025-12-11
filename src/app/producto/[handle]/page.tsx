@@ -151,6 +151,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                         </div>
                     </div>
 
+
                     {/* Info */}
                     <div>
                         <h1 className="text-3xl md:text-5xl font-bold italic tracking-tighter mb-4 uppercase">

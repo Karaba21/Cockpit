@@ -41,13 +41,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </Link>
 
             <div className="p-4">
-                <h3 className="text-lg font-bold mb-2 line-clamp-2 h-14 group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold mb-0 line-clamp-2 h-14 group-hover:text-primary transition-colors">
                     <Link href={`/producto/${product.handle}`}>
                         {product.title}
                     </Link>
                 </h3>
 
-                <div className="flex items-end justify-between mb-4">
+                <div className="-mt-2 flex items-end justify-between mb-4">
                     <div className="flex flex-col">
                         {isOnSale && (
                             <span className="text-sm text-gray-400 line-through">

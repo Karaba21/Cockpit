@@ -120,6 +120,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (items.length === 0) {
             return null;
         }
+        if (items.length === 0) {
+            return null;
+        }
 
         try {
             console.log('Creating fresh checkout for items:', items);
@@ -132,6 +135,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const response = await fetch('/api/cart/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lines }),
                 body: JSON.stringify({ lines }),
             });
 

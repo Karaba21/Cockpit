@@ -65,7 +65,7 @@ function normalizeProduct(shopifyProduct: any): Product {
       id: option.id,
       name: option.name,
       values: option.values,
-    })) || [],
+    })).filter((option: any) => option.name !== 'Title') || [],
     variants: shopifyProduct.variants.edges.map((edge: any) => ({
       id: edge.node.id,
       title: edge.node.title,
@@ -86,6 +86,7 @@ const COLLECTION_QUERY = `
             handle
             title
             description
+            descriptionHtml
             tags
             productType
             collections(first: 5) {
@@ -310,6 +311,7 @@ const SEARCH_QUERY = `
             handle
             title
             description
+            descriptionHtml
             tags
             productType
             collections(first: 5) {

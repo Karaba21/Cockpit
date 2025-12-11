@@ -14,10 +14,10 @@ const Footer = () => {
                             Lideres en simracing en Uruguay.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="https://facebook.com" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                            <a href="https://www.facebook.com/cockpituy" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                                 <Facebook size={20} />
                             </a>
-                            <a href="https://instagram.com" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                            <a href="https://www.instagram.com/cockpit.uy/" className="text-arena hover:text-primary transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                                 <Instagram size={20} />
                             </a>
                         </div>
@@ -29,6 +29,8 @@ const Footer = () => {
                         <ul className="space-y-2 text-sm text-arena">
                             <li><Link href="/" className="hover:text-primary transition-all duration-300 hover:pl-1">Home</Link></li>
                             <li><Link href="/catalogo" className="hover:text-primary transition-all duration-300 hover:pl-1">Catalogo</Link></li>
+                            <li><Link href="#reviews" className="hover:text-primary transition-all duration-300 hover:pl-1">Reviews</Link></li>
+                            <li><Link href="#pickup" className="hover:text-primary transition-all duration-300 hover:pl-1">Pickup</Link></li>
                             <li><Link href="/cart" className="hover:text-primary transition-all duration-300 hover:pl-1">Carrito</Link></li>
                         </ul>
                     </div>
@@ -37,16 +39,16 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Legal</h4>
                         <ul className="space-y-2 text-sm text-arena">
-                            <li><Link href="/policies/privacy-policy" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de privacidad</Link></li>
-                            <li><Link href="/policies/refund-policy" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de reembolso</Link></li>
-                            <li><Link href="/policies/terms-of-service" className="hover:text-primary transition-all duration-300 hover:pl-1">Términos del servicio</Link></li>
+                            <li><Link href="/politica-de-privacidad" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de privacidad</Link></li>
+                            <li><Link href="/politica-de-reembolso" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de reembolso</Link></li>
+                            <li><Link href="/terminos-del-servicio" className="hover:text-primary transition-all duration-300 hover:pl-1">Términos del servicio</Link></li>
                         </ul>
                     </div>
 
                     {/* Newsletter / Contact placeholder */}
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Contacto</h4>
-                        <p className="text-sm text-arena mb-2">¿Tienes dudas?</p>
+                        <p className="text-sm text-arena mb-2">¿Tenes dudas?</p>
                         <a href="mailto:contacto@cockpituy.store" className="text-primary hover:underline text-sm hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)] transition-all duration-300">
                             contacto@cockpituy.store
                         </a>

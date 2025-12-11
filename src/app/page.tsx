@@ -44,9 +44,9 @@ export default async function Home() {
     <div className="flex flex-col gap-8">
       <HeroSection />
 
-      <ProductGrid title="Soportes" products={soportes} />
-
       <FeaturedSection />
+
+      <ProductGrid title="Soportes" products={soportes} />
 
       <ProductGrid title="Volantes y mods" products={volantesMods} />
 
