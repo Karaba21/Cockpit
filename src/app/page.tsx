@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${siteUrl}/opengraph.png`,
+        url: `${siteUrl}/ogimage1200x630.png`,
         width: 1200,
         height: 630,
         alt: 'Cockpit UY',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: [`${siteUrl}/opengraph.png`],
+    images: [`${siteUrl}/ogimage1200x630.png`],
   },
   alternates: {
     canonical: '/',
