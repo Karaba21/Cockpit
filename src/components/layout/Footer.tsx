@@ -55,15 +55,32 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p className="text-xs text-gray-500 mb-4 md:mb-0">
-                        &copy; {new Date().getFullYear()}, COCKPIT UY. Todos los derechos reservados.
-                    </p>
 
-                    <div className="flex items-center space-x-2 text-arena">
-                        <CreditCard size={24} className="text-primary" />
-                        {/* Add more payment icons here */}
-                        <span className="text-xs">Pagos seguros</span>
+                <div className="border-t border-border pt-8 flex flex-col items-center text-sm">
+                    <div className="w-full text-center mb-4">
+                        <p className="text-sm text-arena">
+                            Página creada por{' '}
+                            <a
+                                href="https://savsolutionsuy.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary hover:underline transition-all duration-300"
+                            >
+                                Sav Solutions
+                            </a>
+                        </p>
+                    </div>
+
+                    <div className="w-full flex flex-col md:flex-row justify-between items-center">
+                        <p className="text-xs text-primary mb-4 md:mb-0">
+                            &copy; {new Date().getFullYear()}, COCKPIT UY. Todos los derechos reservados.
+                        </p>
+
+                        <div className="flex items-center space-x-2 text-arena">
+                            <CreditCard size={24} className="text-primary" />
+                            {/* Add more payment icons here */}
+                            <span className="text-xs">Pagos seguros</span>
+                        </div>
                     </div>
                 </div>
             </div>
