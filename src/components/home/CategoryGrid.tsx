@@ -34,30 +34,29 @@ const CategoryCard = ({ title, imageSrc, href, className = '' }: CategoryCardPro
 const CategoryGrid = () => {
     return (
         <section className="container mx-auto px-4 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[600px] md:h-[500px]">
-                {/* Left Column - Mods (Tall) */}
+            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+
                 <CategoryCard
-                    title="Soportes"
-                    imageSrc="/soportes2.jpg"
-                    href="/catalogo?category=soportes"
-                    className="h-full"
+                    title="Volantes"
+                    imageSrc="/volantes3.jpg"
+                    href="/catalogo?category=volantes"
+                    className="h-[350px]"
                 />
 
-                {/* Right Column - Stacked */}
-                <div className="flex flex-col gap-4 h-full">
-                    <CategoryCard
-                        title="Volantes"
-                        imageSrc="/volantes3.jpg"
-                        href="/catalogo?category=volantes"
-                        className="flex-1"
-                    />
-                    <CategoryCard
-                        title="Accesorios"
-                        imageSrc="/mods4.jpg"
-                        href="/catalogo?category=accesorios"
-                        className="flex-1"
-                    />
-                </div>
+                <CategoryCard
+                    title="Soportes"
+                    imageSrc="/cockpitss2.jpg"
+                    href="/catalogo?category=soportes"
+                    className="h-[350px]"
+                />
+
+
+                <CategoryCard
+                    title="Accesorios"
+                    imageSrc="/sintitulo.jpg"
+                    href="/catalogo?category=accesorios"
+                    className="h-[350px]"
+                />
             </div>
         </section>
     );
