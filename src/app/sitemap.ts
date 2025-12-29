@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/catalogo?category=volantes`,
+      url: `${siteUrl}/catalogo?category=volantes-1`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.8,
@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     // Obtener todos los productos para el sitemap
     const products = await getAllProducts();
-    
+
     const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
       url: `${siteUrl}/producto/${product.handle}`,
       lastModified: new Date(),

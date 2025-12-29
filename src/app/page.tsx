@@ -40,9 +40,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const soportes = await getProductsByCollection('soportes');
-  const volantesMods = await getProductsByCollection('volantes-y-mods');
-
   return (
     <div className="flex flex-col gap-8">
       <HeroSection />

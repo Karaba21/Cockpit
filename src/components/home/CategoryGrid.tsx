@@ -39,7 +39,7 @@ const CategoryGrid = () => {
                 <CategoryCard
                     title="Volantes"
                     imageSrc="/volantes3.jpg"
-                    href="/catalogo?category=volantes"
+                    href="/catalogo?category=volantes-1"
                     className="h-[350px]"
                 />
 

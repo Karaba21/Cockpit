@@ -7,15 +7,16 @@ import { getSiteUrl } from '@/lib/seo';
 
 const siteUrl = getSiteUrl();
 
+const categoryNames: Record<string, string> = {
+    soportes: 'Soportes',
+    'volantes-1': 'Volantes',
+    accesorios: 'Accesorios',
+};
+
 export async function generateMetadata({ searchParams }: CatalogPageProps): Promise<Metadata> {
     const resolvedSearchParams = await searchParams;
     const category = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : undefined;
 
-    const categoryNames: Record<string, string> = {
-        soportes: 'Soportes',
-        volantes: 'Volantes',
-        accesorios: 'Accesorios',
-    };
 
     const categoryName = category ? categoryNames[category] || category : 'Todos';
     const title = category ? `${categoryName} - Catálogo` : 'Catálogo Completo';
@@ -86,6 +87,8 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             : `${baseClass} bg-surface-light text-gray-300 hover:text-primary`;
     };
 
+    const categoryTitle = category ? (categoryNames[category] || category) : "Todos los productos";
+
     return (
         <div className="container mx-auto px-4 py-12">
             <h1 className="text-4xl md:text-5xl font-bold italic tracking-tighter mb-8 text-center uppercase">
@@ -100,7 +103,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                 <Link href="/catalogo?category=soportes" className={getButtonClass('soportes')}>
                     Soportes
                 </Link>
-                <Link href="/catalogo?category=volantes" className={getButtonClass('volantes')}>
+                <Link href="/catalogo?category=volantes-1" className={getButtonClass('volantes-1')}>
                     Volantes
                 </Link>
                 <Link href="/catalogo?category=accesorios" className={getButtonClass('accesorios')}>
@@ -108,7 +111,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                 </Link>
             </div>
 
-            <ProductGrid title={category ? category.charAt(0).toUpperCase() + category.slice(1) : "Todos los productos"} products={products} />
+            <ProductGrid title={categoryTitle} products={products} />
         </div>
     );
 }
