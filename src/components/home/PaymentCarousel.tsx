@@ -16,7 +16,7 @@ const PaymentCarousel = () => {
             {/* Text Overlay */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 bg-primary px-4 py-1 shadow-[0_0_15px_15px_rgba(246,146,30,1)]">
                 <span className="text-negro font-bold text-sm md:text-base whitespace-nowrap uppercase tracking-wider">
-                    Hasta 12 cuotas sin recargo
+                    Hasta 12 cuotas sin intereses
                 </span>
             </div>
 
