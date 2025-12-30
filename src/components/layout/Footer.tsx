@@ -49,8 +49,8 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Contacto</h4>
                         <p className="text-sm text-arena mb-2">¿Tenes dudas?</p>
-                        <a href="mailto:contacto@cockpituy.store" className="text-primary hover:underline text-sm hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)] transition-all duration-300">
-                            contacto@cockpituy.store
+                        <a href="mailto:cockpituy@gmail.com" className="text-primary hover:underline text-sm hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)] transition-all duration-300">
+                            cockpituy@gmail.com
                         </a>
                     </div>
                 </div>

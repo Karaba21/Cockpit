@@ -1,4 +1,5 @@
 import HeroSection from '@/components/home/HeroSection';
+import PaymentCarousel from '@/components/home/PaymentCarousel';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductGrid from '@/components/product/ProductGrid';
@@ -41,8 +42,11 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-0">
+
       <HeroSection />
+
+      <PaymentCarousel />
 
       <CategoryGrid />
 
