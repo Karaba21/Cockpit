@@ -1,7 +1,9 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getProductByHandle } from '@/lib/shopify';
+import { getProductByHandle, getRelatedProducts } from '@/lib/shopify';
 import ProductForm from '@/components/product/ProductForm';
+import FAQ from '@/components/product/FAQ';
+import RelatedProductsCarousel from '@/components/product/RelatedProductsCarousel';
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/seo';
 
@@ -62,6 +64,18 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
     if (!product) {
         notFound();
     }
+
+    // Smart collection selection logic for related products
+    // 1. Try to find a collection that matches the product type
+    // 2. Filter out generic collections (all, frontpage, etc)
+    // 3. Fallback to the first collection
+    const categoryCollection = product.collections?.find(c => c === product.productType?.toLowerCase())
+        || product.collections?.find(c => !['all', 'frontpage', 'destacados', 'novedades', 'ofertas', 'home'].includes(c))
+        || product.collections?.[0];
+
+    const relatedProducts = categoryCollection
+        ? await getRelatedProducts(categoryCollection, product.id)
+        : [];
 
     // Structured data para el producto
     const productSchema = {
@@ -163,9 +177,16 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                         </div>
 
                         <ProductForm product={product} />
+
+                        {product.faq && product.faq.length > 0 && (
+                            <FAQ items={product.faq} />
+                        )}
                     </div>
                 </div>
             </div>
+
+            {/* Related Products Section */}
+            <RelatedProductsCarousel products={relatedProducts} />
         </>
     );
 }

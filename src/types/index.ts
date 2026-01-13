@@ -36,6 +36,12 @@ export interface Product {
             currencyCode: string;
         };
     }[];
+    faq?: FAQItem[];
+}
+
+export interface FAQItem {
+    question: string;
+    answer: string;
 }
 
 export interface CartItem extends Product {

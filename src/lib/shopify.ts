@@ -45,6 +45,9 @@ async function shopifyFetch<T>({ query, variables }: { query: string; variables?
 function normalizeProduct(shopifyProduct: any): Product {
   const variant = shopifyProduct.variants.edges[0]?.node;
 
+  console.log('🔍 FAQ Debug - Raw metafield:', shopifyProduct.metafield);
+  console.log('🔍 FAQ Debug - References:', shopifyProduct.metafield?.references);
+
   return {
     id: shopifyProduct.id,
     handle: shopifyProduct.handle,
@@ -73,8 +76,12 @@ function normalizeProduct(shopifyProduct: any): Product {
       selectedOptions: edge.node.selectedOptions,
       price: edge.node.price,
     })) || [],
+    faq: shopifyProduct.metafield?.references?.edges.map((edge: any) => ({
+      question: edge.node.fields.find((f: any) => f.key === 'pregunta')?.value,
+      answer: edge.node.fields.find((f: any) => f.key === 'respuesta')?.value,
+    })).filter((item: any) => item.question && item.answer) || [],
   };
-}
+};
 
 const COLLECTION_QUERY = `
   query getCollection($handle: String!, $first: Int!) {
@@ -184,6 +191,20 @@ const PRODUCT_QUERY = `
             compareAtPrice {
               amount
               currencyCode
+            }
+          }
+        }
+      }
+      metafield(namespace: "custom", key: "preguntas_frecuentes") {
+        references(first: 20) {
+          edges {
+            node {
+              ... on Metaobject {
+                fields {
+                  key
+                  value
+                }
+              }
             }
           }
         }
@@ -372,6 +393,89 @@ export async function searchProducts(query: string): Promise<Product[]> {
     return data.search.edges.map((edge) => normalizeProduct(edge.node));
   } catch (error) {
     console.error('Error searching products:', error);
+    return [];
+  }
+}
+
+const RELATED_PRODUCTS_QUERY = `
+  query getRelatedProducts($handle: String!, $first: Int!) {
+    collection(handle: $handle) {
+      products(first: $first) {
+        edges {
+          node {
+            id
+            handle
+            title
+            description
+            descriptionHtml
+            tags
+            productType
+            collections(first: 5) {
+              edges {
+                node {
+                  handle
+                }
+              }
+            }
+            images(first: 2) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+            options {
+              id
+              name
+              values
+            }
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  compareAtPrice {
+                    amount
+                    currencyCode
+                  }
+                  selectedOptions {
+                    name
+                    value
+                  }
+                  title
+                  availableForSale
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export async function getRelatedProducts(collectionHandle: string, currentProductId: string): Promise<Product[]> {
+  try {
+    const data = await shopifyFetch<{ collection: { products: { edges: { node: any }[] } } }>({
+      query: RELATED_PRODUCTS_QUERY,
+      variables: { handle: collectionHandle, first: 8 }, // Fetch a few more to allow filtering
+    });
+
+    if (!data.collection) {
+      return [];
+    }
+
+    const allProducts = data.collection.products.edges.map((edge) => normalizeProduct(edge.node));
+    const filteredProducts = allProducts.filter((p) => p.id !== currentProductId);
+
+    return filteredProducts.slice(0, 6);
+  } catch (error) {
+    // Silently fail for related products to avoid breaking the page
+    console.error('Error fetching related products:', error);
     return [];
   }
 }
