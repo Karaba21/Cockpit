@@ -109,22 +109,7 @@ const RelatedProductsCarousel: React.FC<RelatedProductsCarouselProps> = ({ produ
                         También te podría interesar
                     </h2>
 
-                    <div className="flex items-center gap-2">
-                        <button
-                            onClick={() => scroll('left')}
-                            className="p-2 rounded-full bg-surface-light border border-border hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                            aria-label="Ver productos anteriores"
-                        >
-                            <ChevronLeft size={20} />
-                        </button>
-                        <button
-                            onClick={() => scroll('right')}
-                            className="p-2 rounded-full bg-surface-light border border-border hover:border-primary/50 hover:text-primary transition-colors"
-                            aria-label="Ver productos siguientes"
-                        >
-                            <ChevronRight size={20} />
-                        </button>
-                    </div>
+
                 </div>
 
                 <div

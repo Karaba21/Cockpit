@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Product } from '@/types';
 import VariantSelector from './VariantSelector';
 import AddToCartButton from './AddToCartButton';
-import { Check } from 'lucide-react';
+import { Check, CreditCard } from 'lucide-react';
 
 interface ProductFormProps {
     product: Product;
@@ -86,6 +86,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                         ${compareAtPrice?.toLocaleString('es-UY')}
                     </span>
                 )}
+            </div>
+
+            {/* Installments Display */}
+            <div className="flex items-center gap-2 text-foreground/80 mb-6">
+                <CreditCard size={20} className="text-primary" />
+                <span className="font-medium">
+                    Hasta <span className="font-bold text-primary">12 cuotas</span> de <span className="font-bold text-primary">${(price / 12).toLocaleString('es-UY', { maximumFractionDigits: 2 })}</span>
+                </span>
             </div>
 
             {/* Description or other info can go here if moved from parent, 

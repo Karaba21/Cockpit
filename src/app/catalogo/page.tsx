@@ -81,7 +81,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
     const getButtonClass = (btnCategory?: string) => {
         const isActive = category === btnCategory;
-        const baseClass = "px-4 py-2 rounded-full transition-colors font-bold";
+        const baseClass = "px-4 py-2 rounded-full transition-colors font-bold text-center flex justify-center items-center";
         return isActive
             ? `${baseClass} bg-primary text-surface`
             : `${baseClass} bg-surface-light text-gray-300 hover:text-primary`;
@@ -91,12 +91,12 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <h1 className="text-4xl md:text-5xl font-bold italic tracking-tighter mb-8 text-center uppercase">
-                Catálogo Completo
+            <h1 className="text-4xl md:text-5xl font-bold italic text-primary tracking-tighter mb-8 text-center uppercase">
+                {categoryTitle}
             </h1>
 
             {/* Filters */}
-            <div className="flex justify-center mb-12 space-x-2 px-4">
+            <div className="grid grid-cols-2 gap-3 md:flex md:justify-center mb-12 px-4">
                 <Link href="/catalogo" className={getButtonClass(undefined)}>
                     Todos
                 </Link>
@@ -111,7 +111,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                 </Link>
             </div>
 
-            <ProductGrid title={categoryTitle} products={products} />
+            <ProductGrid products={products} />
         </div>
     );
 }
