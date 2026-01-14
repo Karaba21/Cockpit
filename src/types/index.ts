@@ -9,6 +9,9 @@ export interface Product {
     images: {
         url: string;
         altText: string;
+        mediaType?: 'image' | 'video' | 'external_video';
+        previewImage?: string;
+        host?: string;
     }[];
     tags?: string[];
     productType?: string;

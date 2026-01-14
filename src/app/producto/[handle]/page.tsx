@@ -4,6 +4,7 @@ import { getProductByHandle, getRelatedProducts } from '@/lib/shopify';
 import ProductForm from '@/components/product/ProductForm';
 import FAQ from '@/components/product/FAQ';
 import RelatedProductsCarousel from '@/components/product/RelatedProductsCarousel';
+import ProductGallery from '@/components/product/ProductGallery';
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/seo';
 
@@ -143,27 +144,11 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
             <div className="container mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     {/* Gallery */}
-                    <div className="space-y-4">
-                        <div className="aspect-square bg-surface-light rounded-lg overflow-hidden border border-border relative">
-                            {product.images[0] ? (
-                                // eslint-disable-next-line @next/next/no-img-element
-                                <img
-                                    src={product.images[0].url}
-                                    alt={product.images[0].altText}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-gray-500">
-                                    No Image
-                                </div>
-                            )}
-                            {isOnSale && (
-                                <span className="absolute top-4 right-4 bg-secondary text-white font-bold px-3 py-1 rounded">
-                                    OFERTA
-                                </span>
-                            )}
-                        </div>
-                    </div>
+                    <ProductGallery
+                        media={product.images}
+                        productTitle={product.title}
+                        isOnSale={!!isOnSale}
+                    />
 
 
                     {/* Info */}

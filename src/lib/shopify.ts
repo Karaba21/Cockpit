@@ -56,10 +56,31 @@ function normalizeProduct(shopifyProduct: any): Product {
     descriptionHtml: shopifyProduct.descriptionHtml || '',
     price: parseFloat(variant?.price?.amount || '0'),
     compareAtPrice: variant?.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : undefined,
-    images: shopifyProduct.images.edges.map((edge: any) => ({
-      url: edge.node.url,
-      altText: edge.node.altText || shopifyProduct.title,
-    })),
+    images: shopifyProduct.media?.edges.map((edge: any) => {
+      const node = edge.node;
+      if (node.mediaContentType === 'IMAGE' && node.image) {
+        return {
+          url: node.image.url,
+          altText: node.image.altText || shopifyProduct.title,
+          mediaType: 'image' as const,
+        };
+      } else if (node.mediaContentType === 'VIDEO' && node.sources) {
+        return {
+          url: node.sources[0]?.url || '',
+          altText: shopifyProduct.title,
+          mediaType: 'video' as const,
+          previewImage: node.previewImage?.url,
+        };
+      } else if (node.mediaContentType === 'EXTERNAL_VIDEO') {
+        return {
+          url: node.embedUrl,
+          altText: shopifyProduct.title,
+          mediaType: 'external_video' as const,
+          host: node.host,
+        };
+      }
+      return null;
+    }).filter(Boolean) || [],
     tags: shopifyProduct.tags,
     productType: shopifyProduct.productType,
     variantId: variant?.id,
@@ -161,11 +182,29 @@ const PRODUCT_QUERY = `
           }
         }
       }
-      images(first: 10) {
+      media(first: 10) {
         edges {
           node {
-            url
-            altText
+            mediaContentType
+            ... on MediaImage {
+              image {
+                url
+                altText
+              }
+            }
+            ... on Video {
+              sources {
+                url
+                mimeType
+              }
+              previewImage {
+                url
+              }
+            }
+            ... on ExternalVideo {
+              embedUrl
+              host
+            }
           }
         }
       }
