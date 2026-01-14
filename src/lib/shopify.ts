@@ -101,6 +101,7 @@ function normalizeProduct(shopifyProduct: any): Product {
       question: edge.node.fields.find((f: any) => f.key === 'pregunta')?.value,
       answer: edge.node.fields.find((f: any) => f.key === 'respuesta')?.value,
     })).filter((item: any) => item.question && item.answer) || [],
+    destacado: shopifyProduct.destacado?.references?.edges.map((edge: any) => edge.node.field?.value).filter(Boolean).join('\n'),
   };
 };
 
@@ -259,6 +260,19 @@ const PRODUCT_QUERY = `
               ... on Metaobject {
                 fields {
                   key
+                  value
+                }
+              }
+            }
+          }
+        }
+      }
+      destacado: metafield(namespace: "custom", key: "destacado") {
+        references(first: 10) {
+          edges {
+            node {
+              ... on Metaobject {
+                field(key: "destacado") {
                   value
                 }
               }

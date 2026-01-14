@@ -157,15 +157,34 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                             {product.title}
                         </h1>
 
-                        <div className="prose prose-invert mb-8 text-gray-300">
-                            <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-                        </div>
+                        {product.destacado && (
+                            <div className="mb-6 space-y-2">
+                                {product.destacado.split('\n').filter(Boolean).map((line, index) => (
+                                    <div key={index} className="flex items-start gap-2 text-lg text-gray-200 font-medium">
+                                        <span className="text-[var(--color-primary)] opacity-80 mt-[0.4em] text-sm">●</span>
+                                        <span>{line}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
 
                         <ProductForm product={product} />
 
                         {product.faq && product.faq.length > 0 && (
                             <FAQ items={product.faq} />
                         )}
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div className="container mx-auto px-4 py-8">
+                <div className="p-6 border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm">
+                    <h3 className="text-xl text-primary font-bold mb-6">Descripción:</h3>
+                    <div className="prose prose-invert max-w-none text-gray-300">
+                        <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                     </div>
                 </div>
             </div>
