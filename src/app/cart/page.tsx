@@ -55,44 +55,49 @@ const CartPage = () => {
                 {/* Cart Items */}
                 <div className="lg:col-span-2 space-y-6">
                     {items.map((item) => (
-                        <div key={item.id} className="flex items-center gap-4 bg-surface-light p-4 rounded-lg border border-border">
-                            <div className="w-24 h-24 bg-white/5 rounded overflow-hidden flex-shrink-0 relative">
-                                {item.images[0] ? (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img
-                                        src={item.images[0].url}
-                                        alt={item.images[0].altText}
-                                        className="w-full h-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">No Image</div>
-                                )}
+                        <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-4 bg-surface-light p-4 rounded-lg border border-border">
+                            <div className="flex gap-4 flex-grow">
+                                <div className="w-24 h-24 bg-white/5 rounded overflow-hidden flex-shrink-0 relative">
+                                    {item.images[0] ? (
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img
+                                            src={item.images[0].url}
+                                            alt={item.images[0].altText}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">No Image</div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <h3 className="font-bold uppercase text-sm sm:text-base mb-1">{item.title}</h3>
+
+                                    <p className="text-primary font-bold">${item.price.toLocaleString('es-UY')}</p>
+                                </div>
                             </div>
-                            <div className="flex-grow">
-                                <h3 className="font-bold uppercase mb-1">{item.title}</h3>
-                                <p className="text-primary font-bold">${item.price.toLocaleString('es-UY')}</p>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="flex items-center border border-border rounded">
+
+                            <div className="flex items-center justify-end gap-4 w-full sm:w-auto pt-2 sm:pt-0 border-t border-white/5 sm:border-t-0">
+                                <div className="flex items-center bg-black/20 border border-white/10 rounded-full">
                                     <button
                                         onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                                        className="px-3 py-1 hover:bg-white/10"
+                                        className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
                                     >
-                                        <Minus size={16} />
+                                        <Minus size={14} />
                                     </button>
-                                    <span className="px-3 py-1 font-mono">{item.quantity}</span>
+                                    <span className="w-8 text-center font-mono text-sm">{item.quantity}</span>
                                     <button
                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                        className="px-3 py-1 hover:bg-white/10"
+                                        className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
                                     >
-                                        <Plus size={16} />
+                                        <Plus size={14} />
                                     </button>
                                 </div>
                                 <button
                                     onClick={() => removeFromCart(item.id)}
-                                    className="text-red-500 hover:text-red-400 transition-colors"
+                                    className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded-full transition-all"
+                                    title="Eliminar producto"
                                 >
-                                    <Trash2 size={20} />
+                                    <Trash2 size={18} />
                                 </button>
                             </div>
                         </div>

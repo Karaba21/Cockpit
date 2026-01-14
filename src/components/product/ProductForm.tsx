@@ -113,6 +113,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             {!selectedVariant && (
                 <p className="text-red-500 mt-2 text-sm">Combinación no disponible</p>
             )}
+
+            {/* Guarantee Image */}
+            <div className="mt-6 flex justify-center w-full">
+                <img
+                    src="/garantia-compra.png"
+                    alt="Garantía de compra"
+                    className="w-3/4 h-auto object-contain"
+                />
+            </div>
         </div>
     );
 };
