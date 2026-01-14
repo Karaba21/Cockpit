@@ -40,7 +40,7 @@ export interface Product {
         };
     }[];
     faq?: FAQItem[];
-    featured?: string;
+    destacado?: string;
 }
 
 export interface FAQItem {

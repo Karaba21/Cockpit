@@ -105,7 +105,7 @@ const RelatedProductsCarousel: React.FC<RelatedProductsCarouselProps> = ({ produ
         >
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 id="related-products-heading" className="text-2xl font-bold italic tracking-tighter uppercase text-white/90">
+                    <h2 id="related-products-heading" className="text-2xl text-primary font-bold italic tracking-tighter uppercase mx-auto">
                         También te podría interesar
                     </h2>
 
