@@ -124,11 +124,29 @@ const COLLECTION_QUERY = `
                 }
               }
             }
-            images(first: 5) {
+            media(first: 5) {
               edges {
                 node {
-                  url
-                  altText
+                  mediaContentType
+                  ... on MediaImage {
+                    image {
+                      url
+                      altText
+                    }
+                  }
+                  ... on Video {
+                    sources {
+                      url
+                      mimeType
+                    }
+                    previewImage {
+                      url
+                    }
+                  }
+                  ... on ExternalVideo {
+                    embedUrl
+                    host
+                  }
                 }
               }
             }
@@ -271,11 +289,29 @@ const ALL_PRODUCTS_QUERY = `
               }
             }
           }
-          images(first: 5) {
+          media(first: 5) {
             edges {
               node {
-                url
-                altText
+                mediaContentType
+                ... on MediaImage {
+                  image {
+                    url
+                    altText
+                  }
+                }
+                ... on Video {
+                  sources {
+                    url
+                    mimeType
+                  }
+                  previewImage {
+                    url
+                  }
+                }
+                ... on ExternalVideo {
+                  embedUrl
+                  host
+                }
               }
             }
           }
@@ -381,11 +417,29 @@ const SEARCH_QUERY = `
                 }
               }
             }
-            images(first: 5) {
+            media(first: 5) {
               edges {
                 node {
-                  url
-                  altText
+                  mediaContentType
+                  ... on MediaImage {
+                    image {
+                      url
+                      altText
+                    }
+                  }
+                  ... on Video {
+                    sources {
+                      url
+                      mimeType
+                    }
+                    previewImage {
+                      url
+                    }
+                  }
+                  ... on ExternalVideo {
+                    embedUrl
+                    host
+                  }
                 }
               }
             }
@@ -456,11 +510,29 @@ const RELATED_PRODUCTS_QUERY = `
                 }
               }
             }
-            images(first: 2) {
+            media(first: 2) {
               edges {
                 node {
-                  url
-                  altText
+                  mediaContentType
+                  ... on MediaImage {
+                    image {
+                      url
+                      altText
+                    }
+                  }
+                  ... on Video {
+                    sources {
+                      url
+                      mimeType
+                    }
+                    previewImage {
+                      url
+                    }
+                  }
+                  ... on ExternalVideo {
+                    embedUrl
+                    host
+                  }
                 }
               }
             }
