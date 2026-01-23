@@ -24,7 +24,7 @@ const CategoryCard = ({ title, imageSrc, href, className = '' }: CategoryCardPro
         </div>
 
         <div className="absolute top-0 left-0 w-full bg-primary py-3 z-10">
-            <h3 className="text-surface font-bold text-2xl uppercase tracking-wider text-center">
+            <h3 className="text-surface font-bold italic text-3xl uppercase tracking-wider text-center">
                 {title}
             </h3>
         </div>
