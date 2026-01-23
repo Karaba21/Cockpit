@@ -45,9 +45,6 @@ async function shopifyFetch<T>({ query, variables }: { query: string; variables?
 function normalizeProduct(shopifyProduct: any): Product {
   const variant = shopifyProduct.variants.edges[0]?.node;
 
-  console.log('🔍 FAQ Debug - Raw metafield:', shopifyProduct.metafield);
-  console.log('🔍 FAQ Debug - References:', shopifyProduct.metafield?.references);
-
   return {
     id: shopifyProduct.id,
     handle: shopifyProduct.handle,

@@ -11,6 +11,8 @@ const categoryNames: Record<string, string> = {
     soportes: 'Soportes',
     'volantes-1': 'Volantes',
     accesorios: 'Accesorios',
+    'plegables': 'Soportes Plegables',
+    'soportes-rigidos': 'Soportes Rígidos',
 };
 
 export async function generateMetadata({ searchParams }: CatalogPageProps): Promise<Metadata> {
@@ -79,12 +81,24 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         console.log('Debug - All Product Types:', allTypes);
     }
 
-    const getButtonClass = (btnCategory?: string) => {
-        const isActive = category === btnCategory;
-        const baseClass = "px-4 py-2 rounded-full transition-colors font-bold text-center flex justify-center items-center";
-        return isActive
-            ? `${baseClass} bg-primary text-surface`
-            : `${baseClass} bg-surface-light text-gray-300 hover:text-primary`;
+    const soportesSubcategories = ['plegables', 'soportes-rigidos'];
+    const isSoportesActive = category === 'soportes' || (category && soportesSubcategories.includes(category));
+
+    const getButtonClass = (btnCategory?: string, isSubcategory = false) => {
+        let isActive = category === btnCategory;
+
+        // Special handling for parent 'Soportes' button
+        if (btnCategory === 'soportes' && isSoportesActive) {
+            isActive = true;
+        }
+
+        const baseClass = "rounded-full transition-colors font-bold text-center flex justify-center items-center";
+        const padding = isSubcategory ? "px-6 py-2 text-sm" : "px-4 py-2";
+
+        if (isActive) {
+            return `${baseClass} ${padding} bg-primary text-surface`;
+        }
+        return `${baseClass} ${padding} bg-surface-light text-gray-300 hover:text-primary`;
     };
 
     const categoryTitle = category ? (categoryNames[category] || category) : "Todos los productos";
@@ -96,19 +110,33 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             </h1>
 
             {/* Filters */}
-            <div className="grid grid-cols-2 gap-3 md:flex md:justify-center mb-12 px-4">
-                <Link href="/catalogo" className={getButtonClass(undefined)}>
-                    Todos
-                </Link>
-                <Link href="/catalogo?category=soportes" className={getButtonClass('soportes')}>
-                    Soportes
-                </Link>
-                <Link href="/catalogo?category=volantes-1" className={getButtonClass('volantes-1')}>
-                    Volantes
-                </Link>
-                <Link href="/catalogo?category=accesorios" className={getButtonClass('accesorios')}>
-                    Accesorios
-                </Link>
+            <div className="flex flex-col items-center gap-8 mb-12">
+                <div className="grid grid-cols-2 gap-3 md:flex md:justify-center">
+                    <Link href="/catalogo" className={getButtonClass(undefined)}>
+                        Todos
+                    </Link>
+                    <Link href="/catalogo?category=soportes" className={getButtonClass('soportes')}>
+                        Soportes
+                    </Link>
+                    <Link href="/catalogo?category=volantes-1" className={getButtonClass('volantes-1')}>
+                        Volantes
+                    </Link>
+                    <Link href="/catalogo?category=accesorios" className={getButtonClass('accesorios')}>
+                        Accesorios
+                    </Link>
+                </div>
+
+                {/* Subcategories for Soportes */}
+                {isSoportesActive && (
+                    <div className="flex gap-2 justify-center animate-fade-in-down">
+                        <Link href="/catalogo?category=plegables" className={getButtonClass('plegables', true)}>
+                            Plegables
+                        </Link>
+                        <Link href="/catalogo?category=soportes-rigidos" className={getButtonClass('soportes-rigidos', true)}>
+                            Rígidos
+                        </Link>
+                    </div>
+                )}
             </div>
 
             <ProductGrid products={products} />

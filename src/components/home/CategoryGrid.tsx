@@ -23,8 +23,8 @@ const CategoryCard = ({ title, imageSrc, href, className = '' }: CategoryCardPro
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
-            <h3 className="text-orange-500 font-bold text-2xl uppercase tracking-wider">
+        <div className="absolute top-0 left-0 w-full bg-primary py-3 z-10">
+            <h3 className="text-surface font-bold text-2xl uppercase tracking-wider text-center">
                 {title}
             </h3>
         </div>
