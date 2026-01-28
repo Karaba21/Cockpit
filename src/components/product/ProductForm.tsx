@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Product } from '@/types';
 import VariantSelector from './VariantSelector';
 import AddToCartButton from './AddToCartButton';
-import { Check, CreditCard } from 'lucide-react';
+import { Check, CreditCard, CircleHelp } from 'lucide-react';
 
 interface ProductFormProps {
     product: Product;
@@ -117,6 +117,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             {/* Add to Cart */}
             <div className={!selectedVariant ? 'opacity-50 pointer-events-none' : ''}>
                 <AddToCartButton product={productForCart} />
+            </div>
+
+            {/* Shipping Banner */}
+            {/* Shipping Banner */}
+            <div className="mt-4 mb-6 relative z-10 bg-neutral-900 border border-neutral-800 text-white p-3 rounded-md flex items-center gap-3 w-full shadow-sm">
+                <CircleHelp className="text-white shrink-0" size={24} />
+                <span className="text-sm">
+                    <span className="font-bold">Envío rápido</span> de 1 a 4 días hábiles.
+                </span>
             </div>
             {!selectedVariant && (
                 <p className="text-red-500 mt-2 text-sm">Combinación no disponible</p>
