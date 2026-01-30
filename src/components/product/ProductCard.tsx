@@ -17,7 +17,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     return (
         <div className="group relative bg-surface-light rounded-lg overflow-hidden shadow-lg hover:shadow-[0_8px_30px_rgba(246,146,30,0.3)] transition-all duration-500 border border-asfalto hover:border-primary/70 before:absolute before:inset-0 before:rounded-lg before:p-[1px] before:bg-gradient-to-br before:from-asfalto before:via-primary/30 before:to-asfalto before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:-z-10 h-full flex flex-col">
-            <Link href={`/producto/${product.handle}`} className="block relative aspect-square overflow-hidden bg-white/5 shrink-0">
+            {/* Overlay Link for the whole card */}
+            <Link
+                href={`/producto/${product.handle}`}
+                className="absolute inset-0 z-[1] text-transparent"
+                aria-label={`Ver producto ${product.title}`}
+            />
+
+            <div className="relative aspect-square overflow-hidden bg-white/5 shrink-0">
                 {/* Image Placeholder */}
                 {product.images[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -34,17 +41,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-negro/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 {isOnSale && (
-                    <span className="absolute top-2 right-2 bg-gradient-to-r from-primary to-primary-hover text-negro text-xs font-bold px-3 py-1 rounded-full shadow-[0_0_12px_rgba(246,146,30,0.6)]">
+                    <span className="absolute top-2 right-2 bg-gradient-to-r from-primary to-primary-hover text-negro text-xs font-bold px-3 py-1 rounded-full shadow-[0_0_12px_rgba(246,146,30,0.6)] z-10 pointer-events-none">
                         OFERTA
                     </span>
                 )}
-            </Link>
+            </div>
 
-            <div className="p-4 flex flex-col flex-1">
+            <div className="p-4 flex flex-col flex-1 relative z-10 pointer-events-none">
                 <h3 className="text-lg font-bold mb-0 line-clamp-2 h-14 group-hover:text-primary transition-colors">
-                    <Link href={`/producto/${product.handle}`}>
-                        {product.title}
-                    </Link>
+                    {product.title}
                 </h3>
 
                 <div className="-mt-2 flex items-end justify-between mb-4 mt-auto">
@@ -60,26 +65,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     </div>
                 </div>
 
-                {(product.collections?.some(c => c === 'soportes' || c === 'soporte') || product.tags?.some(tag => tag.toLowerCase().includes('soporte')) || product.productType?.toLowerCase().includes('soporte')) ? (
-                    <Link
-                        href={`/producto/${product.handle}`}
-                        className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
-                        <span className="relative z-10">Ver Más</span>
-                    </Link>
-                ) : (
-                    <button
-                        onClick={() => addToCart(product)}
-                        className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
-                        aria-label="Agregar al carrito"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
-                        <ShoppingCart size={18} className="relative z-10 group-hover/btn:rotate-12 transition-transform duration-300" />
-                        <span className="relative z-10">Agregar</span>
-                    </button>
-                )}
-
+                <div className="pointer-events-auto">
+                    {(product.collections?.some(c => c === 'soportes' || c === 'soporte') || product.tags?.some(tag => tag.toLowerCase().includes('soporte')) || product.productType?.toLowerCase().includes('soporte')) ? (
+                        <Link
+                            href={`/producto/${product.handle}`}
+                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
+                            <span className="relative z-10">Ver Más</span>
+                        </Link>
+                    ) : (
+                        <button
+                            onClick={() => addToCart(product)}
+                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
+                            aria-label="Agregar al carrito"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
+                            <ShoppingCart size={18} className="relative z-10 group-hover/btn:rotate-12 transition-transform duration-300" />
+                            <span className="relative z-10">Agregar</span>
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     );

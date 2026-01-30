@@ -105,12 +105,10 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <h1 className="text-4xl md:text-5xl font-bold italic text-primary tracking-tighter mb-8 text-center uppercase">
-                {categoryTitle}
-            </h1>
+
 
             {/* Filters */}
-            <div className="flex flex-col items-center gap-8 mb-12">
+            <div className="flex flex-col items-center gap-8 mb-4">
                 <div className="grid grid-cols-2 gap-3 md:flex md:justify-center">
                     <Link href="/catalogo" className={getButtonClass(undefined)}>
                         Todos
@@ -126,6 +124,12 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                     </Link>
                 </div>
 
+
+
+                <h1 className="text-4xl md:text-5xl font-bold italic text-primary tracking-tighter mb-1 text-center uppercase">
+                    {categoryTitle}
+                </h1>
+
                 {/* Subcategories for Soportes */}
                 {isSoportesActive && (
                     <div className="flex gap-2 justify-center animate-fade-in-down">
@@ -137,6 +141,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                         </Link>
                     </div>
                 )}
+
             </div>
 
             <ProductGrid products={products} />

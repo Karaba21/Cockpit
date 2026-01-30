@@ -124,7 +124,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             <div className="mt-4 mb-6 relative z-10 bg-neutral-900 border border-neutral-800 text-white p-3 rounded-md flex items-center gap-3 w-full shadow-sm">
                 <CircleHelp className="text-white shrink-0" size={24} />
                 <span className="text-sm">
-                    <span className="font-bold">Envío rápido</span> de 1 a 4 días hábiles.
+                    <span className="font-bold">Envío rápido</span> de 1 a 3 días hábiles.
                 </span>
             </div>
             {!selectedVariant && (
