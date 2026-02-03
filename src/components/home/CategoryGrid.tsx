@@ -34,18 +34,18 @@ const CategoryCard = ({ title, imageSrc, href, className = '' }: CategoryCardPro
 const CategoryGrid = () => {
     return (
         <section className="container mx-auto px-4 py-12">
-            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl md:max-w-none mx-auto">
 
                 <CategoryCard
                     title="Volantes"
-                    imageSrc="/volsss.jpg"
+                    imageSrc="/volantes6deff.png"
                     href="/catalogo?category=volantes-1"
                     className="h-[350px]"
                 />
 
                 <CategoryCard
                     title="Soportes"
-                    imageSrc="/cockpits-final.jpg"
+                    imageSrc="/sims6deff.png"
                     href="/catalogo?category=soportes"
                     className="h-[350px]"
                 />
@@ -53,7 +53,7 @@ const CategoryGrid = () => {
 
                 <CategoryCard
                     title="Accesorios"
-                    imageSrc="/mods-final.jpg"
+                    imageSrc="/extras6def.png"
                     href="/catalogo?category=accesorios"
                     className="h-[350px]"
                 />
