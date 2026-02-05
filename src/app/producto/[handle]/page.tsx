@@ -5,6 +5,7 @@ import ProductForm from '@/components/product/ProductForm';
 import FAQ from '@/components/product/FAQ';
 import RelatedProductsCarousel from '@/components/product/RelatedProductsCarousel';
 import ProductGallery from '@/components/product/ProductGallery';
+import ScrollToTop from '@/components/ScrollToTop';
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/seo';
 
@@ -136,6 +137,11 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+            />
+            <ScrollToTop />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             <script
                 type="application/ld+json"
