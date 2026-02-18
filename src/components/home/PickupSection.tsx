@@ -4,9 +4,9 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const PickupSection = () => {
     return (
-        <section id="pickup" className="scroll-mt-24 py-16 bg-surface border-t border-asfalto">
+        <section id="pickup" className="scroll-mt-24 py-4 bg-surface border-t border-asfalto">
             <div className="container mx-auto px-4">
-                <h2 className="text-6xl md:text-6xl font-bold italic tracking-tighter mb-12 text-center text-primary">
+                <h2 className="text-6xl md:text-6xl font-bold italic tracking-tighter mb-8 text-center text-primary">
                     PICKUP
                 </h2>
 

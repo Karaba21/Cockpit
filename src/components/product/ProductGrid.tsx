@@ -6,11 +6,12 @@ interface ProductGridProps {
     title?: string;
     products: Product[];
     headerContent?: React.ReactNode;
+    className?: string;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ title, products, headerContent }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ title, products, headerContent, className = "py-16" }) => {
     return (
-        <section className="py-16 container mx-auto px-4">
+        <section className={`${className} container mx-auto px-4`}>
             {title && (
                 <h2 className="text-6xl md:text-6xl font-bold italic tracking-tighter mb-12 text-center text-primary uppercase">
                     {title}

@@ -74,6 +74,41 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
         title: selectedVariant ? `${product.title} - ${selectedVariant.title}` : product.title
     };
 
+
+    const mainButtonRef = React.useRef<HTMLDivElement>(null);
+    const [showStickyFooter, setShowStickyFooter] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // Show sticky footer only when the button is not intersecting AND it's above the viewport (scrolled past)
+                const shouldShow = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+                setShowStickyFooter(shouldShow);
+
+                if (shouldShow) {
+                    document.body.classList.add('sticky-footer-visible');
+                } else {
+                    document.body.classList.remove('sticky-footer-visible');
+                }
+            },
+            {
+                threshold: 0,
+                rootMargin: '0px 0px -100px 0px' // Add some offset to prevent flickering
+            }
+        );
+
+        if (mainButtonRef.current) {
+            observer.observe(mainButtonRef.current);
+        }
+
+        return () => {
+            if (mainButtonRef.current) {
+                observer.unobserve(mainButtonRef.current);
+            }
+            document.body.classList.remove('sticky-footer-visible');
+        };
+    }, []);
+
     return (
         <div>
             {/* Price Display */}
@@ -115,7 +150,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             </div>
 
             {/* Add to Cart */}
-            <div className={!selectedVariant ? 'opacity-50 pointer-events-none' : ''}>
+            <div ref={mainButtonRef} className={!selectedVariant ? 'opacity-50 pointer-events-none' : ''}>
                 <AddToCartButton product={productForCart} />
             </div>
 
@@ -138,6 +173,31 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                     alt="Garantía de compra"
                     className="w-3/4 h-auto object-contain"
                 />
+            </div>
+
+            {/* Sticky Footer */}
+            <div className={`fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-t border-white/10 p-4 transition-transform duration-300 transform ${showStickyFooter ? 'translate-y-0' : 'translate-y-full'}`}>
+                <div className="container mx-auto max-w-6xl flex items-center justify-between gap-4">
+                    <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4">
+                        <div className="hidden md:block text-sm font-medium text-gray-300 max-w-[200px] truncate">
+                            {product.title}
+                        </div>
+                        <div className="flex items-baseline gap-2">
+                            <span className="text-xl font-bold text-primary">
+                                ${price.toLocaleString('es-UY')}
+                            </span>
+                            {isOnSale && (
+                                <span className="text-sm text-gray-400 line-through">
+                                    ${compareAtPrice?.toLocaleString('es-UY')}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className={`flex-shrink-0 ${!selectedVariant ? 'opacity-50 pointer-events-none' : ''}`}>
+                        <AddToCartButton product={productForCart} compact={true} />
+                    </div>
+                </div>
             </div>
         </div>
     );

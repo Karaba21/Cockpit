@@ -9,9 +9,10 @@ export default function WhatsAppButton() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-6 right-6 z-50 group"
+            className="fixed bottom-6 right-6 z-50 group whatsapp-button transition-all duration-300"
             aria-label="Contactar por WhatsApp"
         >
+
             <div className="relative">
                 {/* Main button */}
                 <div className="relative bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all duration-300 transform group-hover:scale-110">

@@ -65,21 +65,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
         ? await getProductsByCollection(category)
         : await getAllProducts();
 
-    if (products.length > 0) {
-        console.log('Debug - First Product:', JSON.stringify({
-            title: products[0].title,
-            tags: products[0].tags,
-            productType: products[0].productType
-        }, null, 2));
 
-        // Log all unique tags to see what we have
-        const allTags = Array.from(new Set(products.flatMap(p => p.tags || [])));
-        console.log('Debug - All Tags:', allTags);
-
-        // Log all unique product types
-        const allTypes = Array.from(new Set(products.map(p => p.productType).filter(Boolean)));
-        console.log('Debug - All Product Types:', allTypes);
-    }
 
     const soportesSubcategories = ['plegables', 'soportes-rigidos'];
     const isSoportesActive = category === 'soportes' || (category && soportesSubcategories.includes(category));
@@ -92,43 +78,60 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             isActive = true;
         }
 
-        const baseClass = "rounded-full transition-colors font-bold text-center flex justify-center items-center";
-        const padding = isSubcategory ? "px-6 py-2 text-sm" : "px-4 py-2";
+        const baseClass = "rounded-full transition-all duration-300 font-bold text-center flex justify-center items-center border";
+        const padding = isSubcategory ? "px-6 py-2 text-sm uppercase tracking-wider" : "px-4 py-2";
 
         if (isActive) {
-            return `${baseClass} ${padding} bg-primary text-surface`;
+            return `${baseClass} ${padding} bg-primary text-black border-primary shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:shadow-[0_0_30px_rgba(246,146,30,0.6)] scale-105`;
         }
-        return `${baseClass} ${padding} bg-surface-light text-gray-300 hover:text-primary`;
+        return `${baseClass} ${padding} bg-surface/50 border-primary text-gray-300 hover:text-primary hover:bg-surface-light backdrop-blur-sm`;
     };
 
-    const categoryTitle = category ? (categoryNames[category] || category) : "Todos los productos";
+    const mainCategories = [
+        { name: 'TODOS', param: undefined },
+        { name: 'SOPORTES', param: 'soportes' },
+        { name: 'VOLANTES', param: 'volantes-1' },
+        { name: 'ACCESORIOS', param: 'accesorios' }
+    ];
+
+    // Find current category index
+    // Handing subcategories of Soportes to map back to Soportes
+    const effectiveCategory = isSoportesActive ? 'soportes' : category;
+
+    const currentIndex = mainCategories.findIndex(c => c.param === effectiveCategory);
+    const activeIndex = currentIndex === -1 ? 0 : currentIndex; // Default to Todos if not found
+
+    const prevIndex = (activeIndex - 1 + mainCategories.length) % mainCategories.length;
+    const nextIndex = (activeIndex + 1) % mainCategories.length;
+
+    const prevCategory = mainCategories[prevIndex];
+    const currentCategoryObj = mainCategories[activeIndex];
+    const nextCategory = mainCategories[nextIndex];
+
+    const getLink = (param?: string) => param ? `/catalogo?category=${param}` : '/catalogo';
 
     return (
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-4">
 
+            {/* Category Carousel Selector */}
+            <div className="flex flex-col items-center gap-2 mb-0">
+                <div className="flex items-center justify-center gap-8 md:gap-12">
+                    <Link href={getLink(prevCategory.param)} aria-label="Categoría anterior" className="text-gray-400 hover:text-primary transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </Link>
 
-            {/* Filters */}
-            <div className="flex flex-col items-center gap-8 mb-4">
-                <div className="grid grid-cols-2 gap-3 md:flex md:justify-center">
-                    <Link href="/catalogo" className={getButtonClass(undefined)}>
-                        Todos
-                    </Link>
-                    <Link href="/catalogo?category=soportes" className={getButtonClass('soportes')}>
-                        Soportes
-                    </Link>
-                    <Link href="/catalogo?category=volantes-1" className={getButtonClass('volantes-1')}>
-                        Volantes
-                    </Link>
-                    <Link href="/catalogo?category=accesorios" className={getButtonClass('accesorios')}>
-                        Accesorios
+                    <h1 className="text-4xl md:text-5xl font-bold italic text-primary tracking-tighter text-center uppercase min-w-[200px]">
+                        {currentCategoryObj.name}
+                    </h1>
+
+                    <Link href={getLink(nextCategory.param)} aria-label="Categoría siguiente" className="text-gray-400 hover:text-primary transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
                     </Link>
                 </div>
-
-
-
-                <h1 className="text-4xl md:text-5xl font-bold italic text-primary tracking-tighter mb-1 text-center uppercase">
-                    {categoryTitle}
-                </h1>
 
                 {/* Subcategories for Soportes */}
                 {isSoportesActive && (
@@ -142,9 +145,21 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                     </div>
                 )}
 
+                {/* Subtitles for Subcategories */}
+                {category === 'plegables' && (
+                    <p className="text-gray-300 text-lg mt-4 italic font-medium tracking-wide animate-fade-in text-center max-w-xl">
+                        Disfrutá tu simulador y guardalo fácilmente cuando lo necesites
+                    </p>
+                )}
+                {category === 'soportes-rigidos' && (
+                    <p className="text-gray-300 text-lg mt-4 italic font-medium tracking-wide animate-fade-in text-center max-w-xl">
+                        Para los que buscan la precisión en cada curva
+                    </p>
+                )}
+
             </div>
 
-            <ProductGrid products={products} />
+            <ProductGrid products={products} className="py-4" />
         </div>
     );
 }

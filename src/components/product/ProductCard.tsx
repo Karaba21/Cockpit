@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Product } from '@/types';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, CreditCard } from 'lucide-react';
 
 import { useCart } from '@/context/CartContext';
 
@@ -47,12 +47,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 )}
             </div>
 
-            <div className="p-4 flex flex-col flex-1 relative z-10 pointer-events-none">
-                <h3 className="text-lg font-bold mb-0 line-clamp-2 h-14 group-hover:text-primary transition-colors">
+            <div className="p-3 flex flex-col flex-1 relative z-10 pointer-events-none">
+                <h3 className="text-lg font-bold mb-0 line-clamp-2 group-hover:text-primary transition-colors">
                     {product.title}
                 </h3>
 
-                <div className="-mt-2 flex items-end justify-between mb-4 mt-auto">
+                <div className="flex items-end justify-between mb-1 mt-0">
                     <div className="flex flex-col">
                         {isOnSale && (
                             <span className="text-sm text-gray-400 line-through">
@@ -62,14 +62,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                         <span className="text-xl font-bold text-primary">
                             ${product.price.toLocaleString('es-UY')}
                         </span>
+                        <div className="flex items-center gap-1 mt-1 text-sm text-gray-300">
+                            <CreditCard size={14} className="text-primary" />
+                            <span>
+                                Hasta <span className="text-primary font-bold">12 cuotas</span> de <span className="text-primary font-bold">${(product.price / 12).toLocaleString('es-UY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="pointer-events-auto">
+                <div className="pointer-events-auto mt-auto">
                     {(product.collections?.some(c => c === 'soportes' || c === 'soporte') || product.tags?.some(tag => tag.toLowerCase().includes('soporte')) || product.productType?.toLowerCase().includes('soporte')) ? (
                         <Link
                             href={`/producto/${product.handle}`}
-                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
+                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
                             <span className="relative z-10">Ver Más</span>
@@ -77,7 +83,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     ) : (
                         <button
                             onClick={() => addToCart(product)}
-                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
+                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
                             aria-label="Agregar al carrito"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>

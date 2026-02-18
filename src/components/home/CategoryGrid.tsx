@@ -33,7 +33,7 @@ const CategoryCard = ({ title, imageSrc, href, className = '' }: CategoryCardPro
 
 const CategoryGrid = () => {
     return (
-        <section className="container mx-auto px-4 py-12">
+        <section className="container mx-auto px-4 py-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl md:max-w-none mx-auto">
 
                 <CategoryCard

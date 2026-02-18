@@ -147,8 +147,13 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="container mx-auto px-4 py-2 md:py-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
+                    {/* Mobile Title */}
+                    <h1 className="text-3xl font-bold italic tracking-tighter uppercase md:hidden">
+                        {product.title}
+                    </h1>
+
                     {/* Gallery */}
                     <ProductGallery
                         media={product.images}
@@ -159,7 +164,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
 
                     {/* Info */}
                     <div>
-                        <h1 className="text-3xl md:text-5xl font-bold italic tracking-tighter mb-4 uppercase">
+                        <h1 className="text-3xl md:text-5xl font-bold italic tracking-tighter mb-4 uppercase hidden md:block">
                             {product.title}
                         </h1>
 

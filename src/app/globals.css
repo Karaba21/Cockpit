@@ -112,3 +112,8 @@ body {
 .animate-scroll-infinite:hover {
   animation-play-state: paused;
 }
+
+/* WhatsApp Button - Sticky Footer Adjustment */
+body.sticky-footer-visible .whatsapp-button {
+  transform: translateY(-80px);
+}
