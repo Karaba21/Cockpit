@@ -4,8 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ProductGrid from '@/components/product/ProductGrid';
 import CategoryGrid from '@/components/home/CategoryGrid';
+import ComparisonSection from '@/components/home/ComparisonSection';
 import FeaturedSection from '@/components/home/FeaturedSection';
 import ReviewsCarousel from '@/components/home/ReviewsCarousel';
+import IsForYou from '@/components/home/IsForYou';
 import StatsStrip from '@/components/home/StatsStrip';
 import PickupSection from '@/components/home/PickupSection';
 import { getProductsByCollection } from '@/lib/shopify';
@@ -49,6 +51,10 @@ export default async function Home() {
       <PaymentCarousel />
 
       <CategoryGrid />
+
+      <ComparisonSection />
+
+      <IsForYou />
 
       <ReviewsCarousel />
 
