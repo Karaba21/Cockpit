@@ -8,8 +8,23 @@ import ProductGallery from '@/components/product/ProductGallery';
 import ScrollToTop from '@/components/ScrollToTop';
 import type { Metadata } from 'next';
 import { getSiteUrl } from '@/lib/seo';
+import IsForYou from "@/components/home/IsForYou";
+import ComparisonSection from '@/components/home/ComparisonSection';
+import { Star } from 'lucide-react';
 
 const siteUrl = getSiteUrl();
+
+const generateFakeRating = (id: string) => {
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+        hash += id.charCodeAt(i);
+    }
+    const rating = 4.5 + ((hash % 51) / 100);
+    const reviews = 150 + (hash % 1000);
+
+    const finalRating = rating > 4.95 ? "5.0" : rating.toFixed(1);
+    return { rating: finalRating, reviews };
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
     const { handle } = await params;
@@ -131,6 +146,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
     };
 
     const isOnSale = product.compareAtPrice && product.compareAtPrice > product.price;
+    const fakeRating = generateFakeRating(product.id);
 
     return (
         <>
@@ -150,9 +166,19 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
             <div className="container mx-auto px-4 py-2 md:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
                     {/* Mobile Title */}
-                    <h1 className="text-3xl font-bold italic tracking-tighter uppercase md:hidden">
-                        {product.title}
-                    </h1>
+                    <div className="md:hidden mb-2">
+                        <h1 className="text-3xl font-bold italic tracking-tighter uppercase mb-1">
+                            {product.title}
+                        </h1>
+                        <div className="flex items-center gap-2">
+                            <div className="flex text-[#FFC107]">
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
+                                ))}
+                            </div>
+                            <span className="text-sm font-medium text-foreground/80">{fakeRating.rating} ({fakeRating.reviews})</span>
+                        </div>
+                    </div>
 
                     {/* Gallery */}
                     <ProductGallery
@@ -164,12 +190,25 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
 
                     {/* Info */}
                     <div>
-                        <h1 className="text-3xl md:text-5xl font-bold italic tracking-tighter mb-4 uppercase hidden md:block">
-                            {product.title}
-                        </h1>
+                        <div className="hidden md:block mb-8">
+                            <h1 className="text-3xl md:text-5xl font-bold italic tracking-tighter uppercase mb-2">
+                                {product.title}
+                            </h1>
+                            <div className="flex items-center gap-2">
+                                <div className="flex text-[#FFC107]">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} size={20} fill="currentColor" strokeWidth={0} />
+                                    ))}
+                                </div>
+                                <span className="text-base font-medium text-foreground/80">{fakeRating.rating} ({fakeRating.reviews})</span>
+                            </div>
+                        </div>
 
+                        <div className="mb-8">
+                            <ProductForm product={product} />
+                        </div>
                         {product.destacado && (
-                            <div className="mb-6 space-y-2">
+                            <div className="mb-6 mt-8 space-y-2">
                                 {product.destacado.split('\n').filter(Boolean).map((line, index) => (
                                     <div key={index} className="flex items-start gap-2 text-lg text-gray-200 font-medium">
                                         <span className="text-[var(--color-primary)] opacity-80 mt-[0.4em] text-sm">●</span>
@@ -179,8 +218,9 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                             </div>
                         )}
 
+                        <IsForYou />
 
-                        <ProductForm product={product} />
+                        <ComparisonSection />
 
                         {product.faq && product.faq.length > 0 && (
                             <FAQ items={product.faq} />
@@ -189,7 +229,10 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                 </div>
 
 
+
             </div>
+
+
 
             <div className="container mx-auto px-4 py-8">
                 <div className="p-6 border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm">

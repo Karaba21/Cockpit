@@ -128,9 +128,24 @@ export default function ProductGallery({ media, productTitle, isOnSale }: Produc
                 )}
             </div>
 
-            {/* Thumbnails - Only show if more than 1 media item */}
+            {/* Mobile Dots Pagination */}
             {media.length > 1 && (
-                <div className="grid grid-cols-5 gap-2">
+                <div className="flex md:hidden justify-center items-center gap-2 pt-2">
+                    {media.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => goToIndex(index)}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-primary scale-110 w-4' : 'bg-border/60 hover:bg-primary/50'
+                                }`}
+                            aria-label={`Ir a la imagen ${index + 1}`}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Desktop Thumbnails */}
+            {media.length > 1 && (
+                <div className="hidden md:grid grid-cols-5 gap-2">
                     {media.map((item, index) => (
                         <button
                             key={index}

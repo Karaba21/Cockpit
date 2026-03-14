@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Product } from '@/types';
 import VariantSelector from './VariantSelector';
 import AddToCartButton from './AddToCartButton';
-import { Check, CreditCard, CircleHelp } from 'lucide-react';
+import { Check, CreditCard, ShoppingCart, Gift } from 'lucide-react';
 
 interface ProductFormProps {
     product: Product;
@@ -77,6 +77,46 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
 
     const mainButtonRef = React.useRef<HTMLDivElement>(null);
     const [showStickyFooter, setShowStickyFooter] = useState(false);
+    const [viewersCount, setViewersCount] = useState(4);
+    const [deliveryDates, setDeliveryDates] = useState({ order: '', delivery: '' });
+
+    useEffect(() => {
+        const today = new Date();
+        const formatDayMonth = (date: Date) => {
+            const d = date.getDate();
+            const m = new Intl.DateTimeFormat('es-UY', { month: 'short' }).format(date);
+            return `${d} ${m.charAt(0).toUpperCase() + m.slice(1).replace('.', '')}`;
+        };
+
+        const addBusinessDays = (startDate: Date, days: number) => {
+            const result = new Date(startDate);
+            let added = 0;
+            while (added < days) {
+                result.setDate(result.getDate() + 1);
+                if (result.getDay() !== 0 && result.getDay() !== 6) {
+                    added++;
+                }
+            }
+            return result;
+        };
+
+        setDeliveryDates({
+            order: formatDayMonth(today),
+            delivery: `${formatDayMonth(addBusinessDays(today, 1))} - ${formatDayMonth(addBusinessDays(today, 3))}`
+        });
+    }, []);
+
+    useEffect(() => {
+        // Prevent hydration mismatch by setting the initial random number
+        // only on the client side after the first render.
+        setViewersCount(Math.floor(Math.random() * (9 - 4 + 1)) + 4);
+
+        const interval = setInterval(() => {
+            setViewersCount(Math.floor(Math.random() * (9 - 4 + 1)) + 4);
+        }, 10000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -112,23 +152,38 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
     return (
         <div>
             {/* Price Display */}
-            <div className="flex items-end gap-4 mb-6">
-                <span className="text-4xl font-bold text-primary">
-                    ${price.toLocaleString('es-UY')}
-                </span>
+            <div className="flex flex-col items-start gap-2 mb-6">
                 {isOnSale && (
-                    <span className="text-xl text-gray-400 line-through mb-1">
-                        ${compareAtPrice?.toLocaleString('es-UY')}
-                    </span>
+                    <div className="bg-primary text-black text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                        OFERTA
+                    </div>
                 )}
+                <div className="flex items-end gap-3">
+                    <span className="text-4xl font-bold text-primary tracking-tight">
+                        ${price.toLocaleString('es-UY')}
+                    </span>
+                    {isOnSale && (
+                        <span className="text-2xl text-foreground/40 line-through mb-1">
+                            ${compareAtPrice?.toLocaleString('es-UY')}
+                        </span>
+                    )}
+                </div>
             </div>
 
             {/* Installments Display */}
-            <div className="flex items-center gap-2 text-foreground/80 mb-6">
-                <CreditCard size={20} className="text-primary" />
-                <span className="font-medium">
-                    Hasta <span className="font-bold text-primary">12 cuotas</span> de <span className="font-bold text-primary">${(price / 12).toLocaleString('es-UY', { maximumFractionDigits: 2 })}</span>
-                </span>
+            <div className="flex items-start gap-4 mb-6">
+                <div className="w-11 h-11 rounded-full border border-primary/40 flex items-center justify-center shrink-0 mt-1">
+                    <CreditCard size={22} className="text-primary" />
+                </div>
+                <div className="flex flex-col">
+                    <span className="text-[11px] font-bold tracking-widest text-foreground/60 uppercase mb-1">
+                        Financiación
+                    </span>
+                    <span className="font-bold text-primary md:text-lg leading-tight uppercase">
+                        Hasta 12 cuotas sin recargo<br />
+                        de ${(price / 12).toLocaleString('es-UY', { maximumFractionDigits: 0 })}
+                    </span>
+                </div>
             </div>
 
             {/* Description or other info can go here if moved from parent, 
@@ -144,9 +199,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             )}
 
             {/* Stock Indicator */}
-            <div className="flex items-center gap-2 text-green-500 mb-8 font-medium">
+            <div className="flex items-center gap-2 text-green-500 mb-6 font-medium">
                 <Check size={20} />
                 <span>{selectedVariant?.availableForSale !== false ? 'Stock disponible' : 'Agotado'}</span>
+            </div>
+
+            {/* Viewer Count */}
+            <div className="mb-4 bg-neutral-900 border border-neutral-800 px-4 py-3 rounded-md flex items-center gap-3 w-full shadow-sm">
+                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 shrink-0">
+                    <span className="text-primary font-bold text-sm transition-all duration-300">{viewersCount}</span>
+                </div>
+                <span className="text-sm text-foreground/90 font-medium">personas están viendo este producto</span>
             </div>
 
             {/* Add to Cart */}
@@ -154,20 +217,53 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                 <AddToCartButton product={productForCart} />
             </div>
 
-            {/* Shipping Banner */}
-            {/* Shipping Banner */}
-            <div className="mt-4 mb-6 relative z-10 bg-neutral-900 border border-neutral-800 text-white p-3 rounded-md flex items-center gap-3 w-full shadow-sm">
-                <CircleHelp className="text-white shrink-0" size={24} />
-                <span className="text-sm">
-                    <span className="font-bold">Envío rápido</span> de 1 a 3 días hábiles.
-                </span>
+            {/* Shipping Timeline Banner */}
+            <div className="mt-4 mb-6 relative z-10 w-full py-2">
+                {deliveryDates.order ? (
+                    <div className="flex items-start w-full relative max-w-sm mx-auto">
+                        {/* Connecting Line */}
+                        <div className="absolute top-6 left-[calc(25%+1.5rem)] right-[calc(25%+1.5rem)] h-[2px] bg-primary/30 z-0" />
+
+                        {/* Lo pedis */}
+                        <div className="flex-1 flex flex-col items-center relative z-10">
+                            <div className="w-12 h-12 rounded-full relative flex items-center justify-center mb-3">
+                                <div className="absolute inset-0 bg-black rounded-full" />
+                                <div className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-full" />
+                                <ShoppingCart className="text-primary relative z-10" size={20} />
+                            </div>
+                            <span className="font-bold text-foreground text-[15px]">{deliveryDates.order}</span>
+                            <span className="text-sm text-foreground/80 mt-1">Lo pedís</span>
+                        </div>
+
+                        {/* Te llega */}
+                        <div className="flex-1 flex flex-col items-center relative z-10">
+                            <div className="w-12 h-12 rounded-full relative flex items-center justify-center mb-3">
+                                <div className="absolute inset-0 bg-black rounded-full" />
+                                <div className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-full" />
+                                <Gift className="text-primary relative z-10" size={20} />
+                            </div>
+                            <span className="font-bold text-foreground text-[15px]">{deliveryDates.delivery}</span>
+                            <span className="text-sm text-foreground/80 mt-1">Te llega 🤝</span>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex justify-center items-center h-[104px]">
+                        <div className="animate-pulse flex space-x-4">
+                            <div className="rounded-full bg-neutral-800 h-10 w-10"></div>
+                            <div className="flex-1 space-y-4 py-1">
+                                <div className="h-2 bg-neutral-800 rounded w-24"></div>
+                                <div className="h-2 bg-neutral-800 rounded w-16"></div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
             {!selectedVariant && (
                 <p className="text-red-500 mt-2 text-sm">Combinación no disponible</p>
             )}
 
             {/* Guarantee Image */}
-            <div className="mt-6 flex justify-center w-full">
+            <div className="mt-4 flex justify-center w-full">
                 <img
                     src="/garantia-compra.png"
                     alt="Garantía de compra"
@@ -178,8 +274,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             {/* Sticky Footer */}
             <div className={`fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-t border-white/10 p-4 transition-transform duration-300 transform ${showStickyFooter ? 'translate-y-0' : 'translate-y-full'}`}>
                 <div className="container mx-auto max-w-6xl flex items-center justify-between gap-4">
-                    <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4">
-                        <div className="hidden md:block text-sm font-medium text-gray-300 max-w-[200px] truncate">
+                    <div className="flex flex-col md:flex-row md:items-center gap-0.5 md:gap-4">
+                        <div className="text-sm font-medium text-white max-w-[200px] truncate">
                             {product.title}
                         </div>
                         <div className="flex items-baseline gap-2">
