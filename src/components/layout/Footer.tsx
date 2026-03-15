@@ -1,8 +1,13 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { Facebook, Instagram, CreditCard } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 const Footer = () => {
+    const { setIsCartOpen } = useCart();
+
     return (
         <footer className="bg-surface border-t border-asfalto pt-16 pb-8">
             <div className="container mx-auto px-4">
@@ -31,7 +36,7 @@ const Footer = () => {
                             <li><Link href="/catalogo" className="hover:text-primary transition-all duration-300 hover:pl-1">Catalogo</Link></li>
                             <li><Link href="#reviews" className="hover:text-primary transition-all duration-300 hover:pl-1">Reviews</Link></li>
                             <li><Link href="#pickup" className="hover:text-primary transition-all duration-300 hover:pl-1">Pickup</Link></li>
-                            <li><Link href="/cart" className="hover:text-primary transition-all duration-300 hover:pl-1">Carrito</Link></li>
+                            <li><button onClick={() => setIsCartOpen(true)} className="hover:text-primary transition-all duration-300 hover:pl-1 text-left w-full">Carrito</button></li>
                         </ul>
                     </div>
 

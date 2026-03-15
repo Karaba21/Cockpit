@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 import { getSiteUrl, seoConfig } from "@/lib/seo";
 
 const siteUrl = getSiteUrl();
@@ -162,6 +163,7 @@ export default function RootLayout({
           />
         </noscript>
         <CartProvider>
+          <CartDrawer />
           <TopBar />
           <Navbar />
           <main className="flex-grow">
