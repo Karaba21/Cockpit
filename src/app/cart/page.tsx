@@ -35,7 +35,7 @@ const CartPage = () => {
     if (items.length === 0) {
         return (
             <div className="container mx-auto px-4 py-24 text-center">
-                <h1 className="text-3xl font-bold italic tracking-tighter mb-6">TU CARRITO ESTÁ VACÍO</h1>
+                <h1 className="text-3xl font-bold tracking-tighter mb-6">TU CARRITO ESTÁ VACÍO</h1>
                 <p className="text-gray-400 mb-8">Parece que aún no has agregado nada.</p>
                 <Link
                     href="/catalogo"
@@ -49,7 +49,7 @@ const CartPage = () => {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <h1 className="text-3xl font-bold italic tracking-tighter mb-8 uppercase">Tu Carrito</h1>
+            <h1 className="text-3xl font-bold tracking-tighter mb-8 uppercase">Tu Carrito</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 {/* Cart Items */}

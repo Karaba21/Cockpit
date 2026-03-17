@@ -41,28 +41,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-negro/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 {isOnSale && (
-                    <span className="absolute top-2 right-2 bg-gradient-to-r from-primary to-primary-hover text-negro text-xs font-bold px-3 py-1 rounded-full shadow-[0_0_12px_rgba(246,146,30,0.6)] z-10 pointer-events-none">
+                    <span className="absolute top-2 right-2 bg-gradient-to-r from-primary to-primary-hover text-negro text-xs font-bold px-3 py-1 rounded-full shadow-[0_0_12px_rgba(246,146,30,0.6)] z-10 pointer-events-none font-dm-sans">
                         OFERTA
                     </span>
                 )}
             </div>
 
             <div className="p-3 flex flex-col flex-1 relative z-10 pointer-events-none">
-                <h3 className="text-lg font-bold mb-0 line-clamp-2 group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold mb-0 line-clamp-2 text-primary transition-colors">
                     {product.title}
                 </h3>
 
                 <div className="flex items-end justify-between mb-1 mt-0">
                     <div className="flex flex-col">
                         {isOnSale && (
-                            <span className="text-sm text-gray-400 line-through">
+                            <span className="text-sm text-gray-400 line-through font-dm-sans">
                                 ${product.compareAtPrice?.toLocaleString('es-UY')}
                             </span>
                         )}
-                        <span className="text-xl font-bold text-primary">
+                        <span className="text-xl font-bold text-arena font-dm-sans">
                             ${product.price.toLocaleString('es-UY')}
                         </span>
-                        <div className="flex items-center gap-1 mt-1 text-sm text-gray-300">
+                        <div className="flex items-center gap-1 mt-1 text-sm text-gray-300 font-dm-sans">
                             <CreditCard size={14} className="text-primary" />
                             <span>
                                 Hasta <span className="text-primary font-bold">12 cuotas</span> de <span className="text-primary font-bold">${(product.price / 12).toLocaleString('es-UY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
@@ -78,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                             className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
-                            <span className="relative z-10">Ver Más</span>
+                            <span className="relative z-10 font-dm-sans">Ver Más</span>
                         </Link>
                     ) : (
                         <button
@@ -88,7 +88,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
                             <ShoppingCart size={18} className="relative z-10 group-hover/btn:rotate-12 transition-transform duration-300" />
-                            <span className="relative z-10">Agregar</span>
+                            <span className="relative z-10 font-dm-sans">Agregar</span>
                         </button>
                     )}
                 </div>

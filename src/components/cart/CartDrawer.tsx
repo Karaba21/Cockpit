@@ -63,7 +63,7 @@ const CartDrawer = () => {
             <div className={`relative w-full max-w-md h-full bg-black border-l border-white/10 shadow-2xl flex flex-col transition-transform duration-300 transform ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
-                    <h2 className="text-xl font-bold italic uppercase">
+                    <h2 className="text-xl font-bold uppercase">
                         Carrito con {cartCount} {cartCount === 1 ? 'producto' : 'productos'}
                     </h2>
                     <button

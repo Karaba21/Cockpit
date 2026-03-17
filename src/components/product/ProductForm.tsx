@@ -154,16 +154,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             {/* Price Display */}
             <div className="flex flex-col items-start gap-2 mb-6">
                 {isOnSale && (
-                    <div className="bg-primary text-black text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                    <div className="bg-primary text-black text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest font-dm-sans">
                         OFERTA
                     </div>
                 )}
                 <div className="flex items-end gap-3">
-                    <span className="text-4xl font-bold text-primary tracking-tight">
+                    <span className="text-4xl font-bold text-primary tracking-tight font-dm-sans">
                         ${price.toLocaleString('es-UY')}
                     </span>
                     {isOnSale && (
-                        <span className="text-2xl text-foreground/40 line-through mb-1">
+                        <span className="text-2xl text-foreground/40 line-through mb-1 font-dm-sans">
                             ${compareAtPrice?.toLocaleString('es-UY')}
                         </span>
                     )}
@@ -176,10 +176,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                     <CreditCard size={22} className="text-primary" />
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-[11px] font-bold tracking-widest text-foreground/60 uppercase mb-1">
+                    <span className="text-[11px] font-bold tracking-widest text-foreground/60 uppercase mb-1 font-dm-sans">
                         Financiación
                     </span>
-                    <span className="font-bold text-primary md:text-lg leading-tight uppercase">
+                    <span className="font-bold text-primary md:text-lg leading-tight uppercase font-dm-sans">
                         Hasta 12 cuotas sin recargo<br />
                         de ${(price / 12).toLocaleString('es-UY', { maximumFractionDigits: 0 })}
                     </span>
@@ -199,13 +199,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             )}
 
             {/* Stock Indicator */}
-            <div className="flex items-center gap-2 text-green-500 mb-6 font-medium">
+            <div className="flex items-center gap-2 text-green-500 mb-6 font-medium font-dm-sans">
                 <Check size={20} />
                 <span>{selectedVariant?.availableForSale !== false ? 'Stock disponible' : 'Agotado'}</span>
             </div>
 
             {/* Viewer Count */}
-            <div className="mb-4 bg-neutral-900 border border-neutral-800 px-4 py-3 rounded-md flex items-center gap-3 w-full shadow-sm">
+            <div className="mb-4 bg-neutral-900 border border-neutral-800 px-4 py-3 rounded-md flex items-center gap-3 w-full shadow-sm font-dm-sans">
                 <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 shrink-0">
                     <span className="text-primary font-bold text-sm transition-all duration-300">{viewersCount}</span>
                 </div>
@@ -231,8 +231,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                                 <div className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-full" />
                                 <ShoppingCart className="text-primary relative z-10" size={20} />
                             </div>
-                            <span className="font-bold text-foreground text-[15px]">{deliveryDates.order}</span>
-                            <span className="text-sm text-foreground/80 mt-1">Lo pedís</span>
+                            <span className="font-bold text-foreground text-[15px] font-dm-sans">{deliveryDates.order}</span>
+                            <span className="text-sm text-foreground/80 mt-1 font-dm-sans">Lo pedís</span>
                         </div>
 
                         {/* Te llega */}
@@ -242,8 +242,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                                 <div className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-full" />
                                 <Gift className="text-primary relative z-10" size={20} />
                             </div>
-                            <span className="font-bold text-foreground text-[15px]">{deliveryDates.delivery}</span>
-                            <span className="text-sm text-foreground/80 mt-1">Te llega 🤝</span>
+                            <span className="font-bold text-foreground text-[15px] font-dm-sans">{deliveryDates.delivery}</span>
+                            <span className="text-sm text-foreground/80 mt-1 font-dm-sans">Te llega 🤝</span>
                         </div>
                     </div>
                 ) : (

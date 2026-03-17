@@ -33,18 +33,18 @@ const FeaturedProduct = async ({ handle, title, description, reverse = false }: 
                 </h2>
                 <div className="text-gray-400 text-lg mb-8 leading-relaxed prose prose-invert">
                     {description ? (
-                        <p className="whitespace-pre-line">{description}</p>
+                        <p className="whitespace-pre-line font-dm-sans">{description}</p>
                     ) : product.descriptionHtml ? (
                         <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                     ) : (
-                        <p className="whitespace-pre-line">
+                        <p className="whitespace-pre-line font-dm-sans">
                             {product.description}
                         </p>
                     )}
                 </div>
                 <Link
                     href={`/producto/${handle}`}
-                    className="inline-block bg-primary hover:bg-primary-hover text-surface font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg uppercase tracking-wider"
+                    className="inline-block bg-primary hover:bg-primary-hover text-surface font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg uppercase tracking-wider font-dm-sans"
                 >
                     Más información
                 </Link>

@@ -15,7 +15,7 @@ const PaymentCarousel = () => {
         <div className="w-full bg-primary overflow-hidden py-3 relative z-20">
             {/* Text Overlay */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 bg-primary px-4 py-1 shadow-[0_0_15px_15px_rgba(246,146,30,1)]">
-                <span className="block md:inline text-negro font-bold text-xs md:text-base text-center uppercase tracking-wider leading-tight">
+                <span className="block md:inline text-negro font-bold text-xs md:text-base text-center uppercase tracking-wider leading-tight font-dm-sans">
                     Hasta 12 cuotas <br className="md:hidden" /> sin intereses
                 </span>
             </div>

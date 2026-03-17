@@ -78,14 +78,14 @@ export default function ComparisonSection() {
             {comparisonData.map((row, idx) => (
               <div key={idx} className={`grid grid-cols-[1fr_1.3fr_1.3fr] md:grid-cols-[1fr_1.5fr_1.5fr] group hover:bg-white/[0.02] transition-colors duration-300 ${idx !== comparisonData.length - 1 ? 'border-b border-white/5' : ''}`}>
                 <div className="p-3 md:p-8 flex flex-col justify-center border-r border-transparent">
-                  <span className="font-medium text-white/70 text-xs md:text-xl">{row.feature}</span>
+                  <span className="font-medium text-white/70 text-xs md:text-xl font-dm-sans">{row.feature}</span>
                 </div>
 
                 <div className="p-3 md:p-8 flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-4 border-r border-white/5 text-center md:text-left">
                   <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-500/10 mb-1 md:mb-0">
                     <X className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" strokeWidth={3} />
                   </div>
-                  <span className="text-white/50 text-[10px] md:text-base font-medium leading-tight">
+                  <span className="text-white/50 text-[10px] md:text-base font-medium leading-tight font-dm-sans">
                     {row.escritorio}
                   </span>
                 </div>
@@ -94,7 +94,7 @@ export default function ComparisonSection() {
                   <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500/10 mb-1 md:mb-0">
                     <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-500" strokeWidth={3} />
                   </div>
-                  <span className="text-white text-[10px] md:text-base font-semibold leading-tight">
+                  <span className="text-white text-[10px] md:text-base font-semibold leading-tight font-dm-sans">
                     {row.soporte}
                   </span>
                 </div>

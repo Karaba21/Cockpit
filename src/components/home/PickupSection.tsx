@@ -6,7 +6,7 @@ const PickupSection = () => {
     return (
         <section id="pickup" className="scroll-mt-24 py-4 bg-surface border-t border-asfalto">
             <div className="container mx-auto px-4">
-                <h2 className="text-6xl md:text-6xl font-bold italic tracking-tighter mb-8 text-center text-primary">
+                <h2 className="text-6xl md:text-6xl font-bold tracking-tighter mb-8 text-center text-primary font-outfit">
                     PICKUP
                 </h2>
 
@@ -20,8 +20,8 @@ const PickupSection = () => {
                                 <MapPin className="text-primary" size={20} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-foreground mb-1">Dirección</h4>
-                                <p className="text-arena text-lg">
+                                <h4 className="font-bold text-foreground mb-1 font-dm-sans">Dirección</h4>
+                                <p className="text-arena text-lg font-dm-sans">
                                     Carrasco Norte, Montevideo
                                 </p>
                             </div>
@@ -33,10 +33,10 @@ const PickupSection = () => {
                                 <Phone className="text-primary" size={20} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-foreground mb-1">Teléfono</h4>
+                                <h4 className="font-bold text-foreground mb-1 font-dm-sans">Teléfono</h4>
                                 <a
                                     href="tel:+59893474177"
-                                    className="text-arena text-lg hover:text-primary transition-all duration-300"
+                                    className="text-arena text-lg hover:text-primary transition-all duration-300 font-dm-sans"
                                 >
                                     +598 93474177
                                 </a>
@@ -49,10 +49,10 @@ const PickupSection = () => {
                                 <Mail className="text-primary" size={20} />
                             </div>
                             <div>
-                                <h4 className="font-bold text-foreground mb-1">Email</h4>
+                                <h4 className="font-bold text-foreground mb-1 font-dm-sans">Email</h4>
                                 <a
                                     href="mailto:cockpituy@gmail.com"
-                                    className="text-arena text-lg hover:text-primary transition-all duration-300"
+                                    className="text-arena text-lg hover:text-primary transition-all duration-300 font-dm-sans"
                                 >
                                     cockpituy@gmail.com
                                 </a>

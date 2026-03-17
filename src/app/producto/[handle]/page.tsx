@@ -167,7 +167,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
                     {/* Mobile Title */}
                     <div className="md:hidden mb-2">
-                        <h1 className="text-3xl font-bold italic tracking-tighter uppercase mb-1">
+                        <h1 className="text-3xl font-bold tracking-tighter uppercase mb-1">
                             {product.title}
                         </h1>
                         <div className="flex items-center gap-2">
@@ -237,7 +237,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
             <div className="container mx-auto px-4 py-8">
                 <div className="p-6 border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm">
                     <h3 className="text-xl text-primary font-bold mb-6">Descripción:</h3>
-                    <div className="prose prose-invert max-w-none text-gray-300">
+                    <div className="prose prose-invert max-w-none text-gray-300 font-dm-sans">
                         <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                     </div>
                 </div>

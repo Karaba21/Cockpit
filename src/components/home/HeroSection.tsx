@@ -24,7 +24,7 @@ const HeroSection = () => {
                             />
                         </div>
 
-                        <p className="text-xl md:text-5xl text-gray-300 mb-10 font-bold italic">
+                        <p className="text-xl md:text-5xl text-gray-300 mb-10 font-bold italic font-outfit uppercase">
                             Lideres en simracing
                         </p>
 

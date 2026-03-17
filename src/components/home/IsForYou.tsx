@@ -49,12 +49,12 @@ export default function IsForYou() {
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg md:text-xl font-black text-white">{stat.p}%</span>
+                    <span className="text-lg md:text-xl font-black text-white font-dm-sans">{stat.p}%</span>
                   </div>
                 </div>
 
                 {/* Text */}
-                <p className="text-base md:text-xl text-arena leading-snug">
+                <p className="text-base md:text-xl text-arena leading-snug font-dm-sans">
                   {stat.text}
                 </p>
               </div>

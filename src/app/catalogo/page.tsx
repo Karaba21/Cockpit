@@ -122,7 +122,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                         </svg>
                     </Link>
 
-                    <h1 className="text-4xl md:text-5xl font-bold italic text-primary tracking-tighter text-center uppercase min-w-[200px]">
+                    <h1 className="text-4xl md:text-5xl font-bold  text-primary tracking-tighter text-center uppercase min-w-[200px]">
                         {currentCategoryObj.name}
                     </h1>
 
@@ -147,12 +147,12 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
 
                 {/* Subtitles for Subcategories */}
                 {category === 'plegables' && (
-                    <p className="text-gray-300 text-lg mt-4 italic font-medium tracking-wide animate-fade-in text-center max-w-xl">
+                    <p className="text-gray-300 text-lg mt-4 tracking-wide animate-fade-in text-center max-w-xl font-dm-sans">
                         Disfrutá tu simulador y guardalo fácilmente cuando lo necesites
                     </p>
                 )}
                 {category === 'soportes-rigidos' && (
-                    <p className="text-gray-300 text-lg mt-4 italic font-medium tracking-wide animate-fade-in text-center max-w-xl">
+                    <p className="text-gray-300 text-lg mt-4 tracking-wide animate-fade-in text-center max-w-xl font-dm-sans">
                         Para los que buscan la precisión en cada curva
                     </p>
                 )}
