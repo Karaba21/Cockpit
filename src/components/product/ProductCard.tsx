@@ -16,8 +16,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { addToCart } = useCart();
     const isOnSale = product.compareAtPrice && product.compareAtPrice > product.price;
 
+    const isAvailable = product.variants && product.variants.length > 0
+        ? product.variants.some(v => v.availableForSale)
+        : true;
+
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
+        if (!isAvailable) return;
         logEvent('AddToCart', {
             content_ids: [product.id],
             content_name: product.title,
@@ -96,12 +101,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     ) : (
                         <button
                             onClick={handleAddToCart}
-                            className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
-                            aria-label="Agregar al carrito"
+                            disabled={!isAvailable}
+                            className={`group/btn relative w-full ${!isAvailable ? 'bg-neutral-600 text-neutral-400 cursor-not-allowed opacity-70' : 'bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]'} font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden`}
+                            aria-label={!isAvailable ? "Agotado" : "Agregar al carrito"}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
+                            {!isAvailable ? null : <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>}
                             <ShoppingCart size={18} className="relative z-10 group-hover/btn:rotate-12 transition-transform duration-300" />
-                            <span className="relative z-10 font-dm-sans">Agregar</span>
+                            <span className="relative z-10 font-dm-sans">{!isAvailable ? 'Agotado' : 'Agregar'}</span>
                         </button>
                     )}
                 </div>

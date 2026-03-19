@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Product } from '@/types';
 import VariantSelector from './VariantSelector';
 import AddToCartButton from './AddToCartButton';
-import { Check, CreditCard, ShoppingCart, Gift } from 'lucide-react';
+import { Check, CreditCard, ShoppingCart, Gift, X } from 'lucide-react';
 
 interface ProductFormProps {
     product: Product;
@@ -199,8 +199,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             )}
 
             {/* Stock Indicator */}
-            <div className="flex items-center gap-2 text-green-500 mb-6 font-medium font-dm-sans">
-                <Check size={20} />
+            <div className={`flex items-center gap-2 mb-6 font-medium font-dm-sans ${selectedVariant?.availableForSale !== false ? 'text-green-500' : 'text-red-500'}`}>
+                {selectedVariant?.availableForSale !== false ? <Check size={20} /> : <X size={20} />}
                 <span>{selectedVariant?.availableForSale !== false ? 'Stock disponible' : 'Agotado'}</span>
             </div>
 
@@ -214,7 +214,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
 
             {/* Add to Cart */}
             <div ref={mainButtonRef} className={!selectedVariant ? 'opacity-50 pointer-events-none' : ''}>
-                <AddToCartButton product={productForCart} />
+                <AddToCartButton product={productForCart} availableForSale={selectedVariant?.availableForSale} />
             </div>
 
             {/* Shipping Timeline Banner */}
@@ -291,7 +291,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
                     </div>
 
                     <div className={`flex-shrink-0 ${!selectedVariant ? 'opacity-50 pointer-events-none' : ''}`}>
-                        <AddToCartButton product={productForCart} compact={true} />
+                        <AddToCartButton product={productForCart} compact={true} availableForSale={selectedVariant?.availableForSale} />
                     </div>
                 </div>
             </div>
