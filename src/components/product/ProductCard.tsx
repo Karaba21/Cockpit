@@ -6,6 +6,7 @@ import { Product } from '@/types';
 import { ShoppingCart, CreditCard } from 'lucide-react';
 
 import { useCart } from '@/context/CartContext';
+import { logEvent } from '@/lib/fpixel';
 
 interface ProductCardProps {
     product: Product;
@@ -14,6 +15,18 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { addToCart } = useCart();
     const isOnSale = product.compareAtPrice && product.compareAtPrice > product.price;
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        logEvent('AddToCart', {
+            content_ids: [product.id],
+            content_name: product.title,
+            content_type: 'product',
+            value: product.price,
+            currency: 'UYU'
+        });
+        addToCart(product);
+    };
 
     return (
         <div className="group relative bg-surface-light rounded-lg overflow-hidden shadow-lg hover:shadow-[0_8px_30px_rgba(246,146,30,0.3)] transition-all duration-500 border border-asfalto hover:border-primary/70 before:absolute before:inset-0 before:rounded-lg before:p-[1px] before:bg-gradient-to-br before:from-asfalto before:via-primary/30 before:to-asfalto before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:-z-10 h-full flex flex-col">
@@ -82,7 +95,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                         </Link>
                     ) : (
                         <button
-                            onClick={() => addToCart(product)}
+                            onClick={handleAddToCart}
                             className="group/btn relative w-full bg-gradient-to-r from-asfalto to-asfalto/80 hover:from-primary hover:to-primary-hover text-foreground hover:text-negro font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_0_20px_rgba(246,146,30,0.4)] hover:scale-[1.02]"
                             aria-label="Agregar al carrito"
                         >

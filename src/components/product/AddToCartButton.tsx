@@ -4,6 +4,7 @@ import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types';
+import { logEvent } from '@/lib/fpixel';
 
 interface AddToCartButtonProps {
     product: Product;
@@ -21,6 +22,13 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, className = 
 
     const handleBuyNow = async () => {
         setIsLoading(true);
+        logEvent('AddToCart', {
+            content_ids: [product.id],
+            content_name: product.title,
+            content_type: 'product',
+            value: product.price,
+            currency: 'UYU'
+        });
         const url = await buyNow(product);
         if (url) {
             window.location.href = url;
@@ -43,9 +51,20 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, className = 
         );
     }
 
+    const handleAddToCart = () => {
+        logEvent('AddToCart', {
+            content_ids: [product.id],
+            content_name: product.title,
+            content_type: 'product',
+            value: product.price,
+            currency: 'UYU'
+        });
+        addToCart(product);
+    };
+
     return (
         <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className={`group relative w-full ${compact ? '' : 'md:w-auto'} bg-gradient-to-r from-primary to-primary-hover text-negro font-bold ${compact ? 'py-3 px-6 text-sm' : 'py-4 px-12'} rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(246,146,30,0.6)] shadow-[0_4px_20px_rgba(246,146,30,0.3)] uppercase tracking-wider flex items-center justify-center gap-3 cursor-pointer overflow-hidden ${className}`}
         >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>

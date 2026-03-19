@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { X, Trash2, Minus, Plus, Truck } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { logEvent } from '@/lib/fpixel';
 
 const CartDrawer = () => {
     const { items, removeFromCart, updateQuantity, getCheckoutUrl, isCartOpen, setIsCartOpen, cartCount } = useCart();
@@ -34,6 +35,13 @@ const CartDrawer = () => {
     const handleCheckout = async () => {
         setIsCheckingOut(true);
         setCheckoutError(null);
+
+        logEvent('InitiateCheckout', {
+            content_ids: items.map(item => item.id),
+            num_items: items.reduce((sum, item) => sum + item.quantity, 0),
+            value: subtotal,
+            currency: 'UYU'
+        });
 
         try {
             const checkoutUrl = await getCheckoutUrl();
