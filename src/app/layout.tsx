@@ -142,8 +142,10 @@ export default function RootLayout({
         />
         <CartProvider>
           <CartDrawer />
-          <TopBar />
-          <Navbar />
+          <div className="sticky top-0 z-50 w-full flex flex-col">
+            <TopBar />
+            <Navbar />
+          </div>
           <main className="flex-grow">
             {children}
           </main>

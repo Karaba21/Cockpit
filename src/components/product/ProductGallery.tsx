@@ -97,13 +97,6 @@ export default function ProductGallery({ media, productTitle, isOnSale }: Produc
             <div className="aspect-square bg-surface-light rounded-lg overflow-hidden border border-border relative group">
                 {renderMedia(currentMedia, true)}
 
-                {/* Sale Badge */}
-                {isOnSale && (
-                    <span className="absolute top-4 right-4 bg-secondary text-white font-bold px-3 py-1 rounded z-10">
-                        OFERTA
-                    </span>
-                )}
-
                 {/* Navigation Arrows - Only show if more than 1 media item */}
                 {media.length > 1 && (
                     <>

@@ -73,11 +73,11 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, className = 
         <button
             onClick={handleAddToCart}
             disabled={!isAvailable}
-            className={`group relative w-full ${compact ? '' : 'md:w-auto'} ${!isAvailable ? 'bg-neutral-600 text-neutral-400 opacity-70 cursor-not-allowed' : 'bg-gradient-to-r from-primary to-primary-hover text-negro shadow-[0_4px_20px_rgba(246,146,30,0.3)] hover:scale-105 hover:shadow-[0_0_30px_rgba(246,146,30,0.6)] cursor-pointer'} font-bold ${compact ? 'py-3 px-6 text-sm' : 'py-4 px-12'} rounded-full transition-all duration-300 transform uppercase tracking-wider flex items-center justify-center gap-3 overflow-hidden ${className}`}
+            className={`group relative w-full ${compact ? '' : 'md:w-auto'} ${!isAvailable ? 'bg-neutral-600 text-neutral-400 opacity-70 cursor-not-allowed' : 'bg-gradient-to-r from-primary to-primary-hover text-negro shadow-[0_4px_20px_rgba(246,146,30,0.3)] hover:scale-105 hover:shadow-[0_0_30px_rgba(246,146,30,0.6)] cursor-pointer'} font-bold ${compact ? 'py-2 sm:py-3 px-3 sm:px-6 text-[11px] sm:text-sm' : 'py-4 px-12'} rounded-full transition-all duration-300 transform uppercase tracking-wider flex items-center justify-center gap-1 sm:gap-3 overflow-hidden ${className}`}
         >
             {!isAvailable ? null : <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>}
-            <ShoppingCart size={compact ? 18 : 24} className="relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-            <span className="relative z-10">{!isAvailable ? 'Agotado' : 'Agregar al carrito'}</span>
+            <ShoppingCart size={compact ? 16 : 24} className={`relative z-10 group-hover:rotate-12 transition-transform duration-300 ${compact ? 'sm:w-[18px] sm:h-[18px]' : ''}`} />
+            <span className="relative z-10 whitespace-nowrap">{!isAvailable ? 'Agotado' : 'Agregar al carrito'}</span>
         </button>
     );
 };

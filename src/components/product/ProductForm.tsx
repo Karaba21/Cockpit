@@ -273,17 +273,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
 
             {/* Sticky Footer */}
             <div className={`fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-t border-white/10 p-4 transition-transform duration-300 transform ${showStickyFooter ? 'translate-y-0' : 'translate-y-full'}`}>
-                <div className="container mx-auto max-w-6xl flex items-center justify-between gap-4">
-                    <div className="flex flex-col md:flex-row md:items-center gap-0.5 md:gap-4">
-                        <div className="text-sm font-medium text-white max-w-[200px] truncate">
+                <div className="container mx-auto max-w-6xl flex items-center justify-between gap-2 sm:gap-4">
+                    <div className="flex flex-col md:flex-row md:items-center gap-0.5 md:gap-4 flex-1 min-w-0">
+                        <div className="text-[11px] sm:text-sm font-medium text-white truncate max-w-full">
                             {product.title}
                         </div>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-xl font-bold text-primary">
+                        <div className="flex items-baseline gap-1 sm:gap-2">
+                            <span className="text-lg sm:text-xl font-bold text-primary">
                                 ${price.toLocaleString('es-UY')}
                             </span>
                             {isOnSale && (
-                                <span className="text-sm text-gray-400 line-through">
+                                <span className="text-xs sm:text-sm text-gray-400 line-through">
                                     ${compareAtPrice?.toLocaleString('es-UY')}
                                 </span>
                             )}

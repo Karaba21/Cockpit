@@ -24,9 +24,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products, headerConten
                 </div>
             )}
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
                 {products.map((product) => (
-                    <div key={product.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]">
+                    <div key={product.id} className="w-[calc(50%-6px)] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]">
                         <ProductCard product={product} />
                     </div>
                 ))}

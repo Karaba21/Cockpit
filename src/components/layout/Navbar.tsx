@@ -26,7 +26,7 @@ const Navbar = () => {
     }, [isMenuOpen]);
 
     return (
-        <header className="bg-black sticky top-0 z-50">
+        <header className="bg-black z-40 relative">
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">
                 {/* Mobile Menu Button */}
                 <button

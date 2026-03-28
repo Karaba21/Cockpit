@@ -1,8 +1,19 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
 export default function WhatsAppButton() {
     const phoneNumber = '59893474177'; // +598 94409481 in international format without +
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
+    const [showTooltip, setShowTooltip] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowTooltip(true);
+        }, 10000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <a
@@ -32,7 +43,7 @@ export default function WhatsAppButton() {
                 </div>
 
                 {/* Tooltip */}
-                <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className={`absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap transition-opacity duration-300 pointer-events-none ${showTooltip ? 'opacity-100' : 'opacity-0'} group-hover:opacity-100`}>
                     Chatea con nosotros
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-45 w-2 h-2 bg-gray-900"></div>
                 </div>
