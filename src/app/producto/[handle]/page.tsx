@@ -20,7 +20,7 @@ const generateFakeRating = (id: string) => {
         hash += id.charCodeAt(i);
     }
     const rating = 4.5 + ((hash % 51) / 100);
-    const reviews = 150 + (hash % 1000);
+    const reviews = 100 + (hash % 121);
 
     const finalRating = rating > 4.95 ? "5.0" : rating.toFixed(1);
     return { rating: finalRating, reviews };

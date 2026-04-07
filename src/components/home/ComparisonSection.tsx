@@ -85,7 +85,7 @@ export default function ComparisonSection() {
                   <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-500/10 mb-1 md:mb-0">
                     <X className="w-3.5 h-3.5 md:w-4 md:h-4 text-red-500" strokeWidth={3} />
                   </div>
-                  <span className="text-white/50 text-[10px] md:text-base font-medium leading-tight font-dm-sans">
+                  <span className="text-white/50 text-[10px] md:text-base font-medium leading-tight font-dm-sans uppercase">
                     {row.escritorio}
                   </span>
                 </div>
@@ -94,7 +94,7 @@ export default function ComparisonSection() {
                   <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500/10 mb-1 md:mb-0">
                     <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-500" strokeWidth={3} />
                   </div>
-                  <span className="text-white text-[10px] md:text-base font-semibold leading-tight font-dm-sans">
+                  <span className="text-white text-[10px] md:text-base font-semibold leading-tight font-dm-sans uppercase">
                     {row.soporte}
                   </span>
                 </div>
