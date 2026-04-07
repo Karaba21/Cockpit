@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 
 const reviewImages = [
     '/reseñas/WhatsApp Image 2025-12-02 at 16.25.47.jpeg',
@@ -33,12 +32,11 @@ const ReviewsCarousel = () => {
                     {duplicatedImages.map((src, index) => (
                         <div key={`review-${index}`} className="flex-shrink-0 w-[200px] md:w-[250px]">
                             <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl">
-                                <Image
+                                <img
                                     src={src}
                                     alt={`Reseña cliente ${(index % reviewImages.length) + 1}`}
-                                    fill
-                                    className="object-cover"
-                                    sizes="250px"
+                                    loading="lazy"
+                                    className="absolute inset-0 w-full h-full object-cover"
                                 />
                             </div>
                         </div>

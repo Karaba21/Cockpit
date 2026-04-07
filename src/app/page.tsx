@@ -1,7 +1,6 @@
 import HeroSection from '@/components/home/HeroSection';
 import PaymentCarousel from '@/components/home/PaymentCarousel';
 import Link from 'next/link';
-import Image from 'next/image';
 import ProductGrid from '@/components/product/ProductGrid';
 import CategoryGrid from '@/components/home/CategoryGrid';
 import ComparisonSection from '@/components/home/ComparisonSection';

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getProductByHandle } from '@/lib/shopify';
 
 
@@ -15,12 +14,11 @@ const FeaturedProduct = async ({ handle, title, description, reverse = false }: 
             <div className="w-full md:w-1/2">
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-white/5 shadow-2xl border border-border">
                     {product.images && product.images.length > 0 && (
-                        <Image
+                        <img
                             src={product.images[0].url}
                             alt={product.images[0].altText || product.title}
-                            fill
-                            className="object-contain"
-                            priority
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-contain"
                         />
                     )}
                 </div>
@@ -44,6 +42,7 @@ const FeaturedProduct = async ({ handle, title, description, reverse = false }: 
                 </div>
                 <Link
                     href={`/producto/${handle}`}
+                    prefetch={false}
                     className="inline-block bg-primary hover:bg-primary-hover text-surface font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg uppercase tracking-wider font-dm-sans"
                 >
                     Más información

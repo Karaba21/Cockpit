@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X, ShoppingCart, User, Facebook, Instagram, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
@@ -39,11 +38,9 @@ const Navbar = () => {
 
                 {/* Logo */}
                 <Link href="/" className="flex-shrink-0">
-                    <Image
+                    <img
                         src="/logocockpit.png"
                         alt="Cockpit UY"
-                        width={120}
-                        height={40}
                         className="h-10 w-auto object-contain"
                     />
                 </Link>

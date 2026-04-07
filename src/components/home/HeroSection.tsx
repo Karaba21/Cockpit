@@ -1,18 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const HeroSection = () => {
     return (
         <section className="relative w-full bg-black overflow-hidden">
             {/* Mobile Background Image */}
             <div className="md:hidden absolute inset-0 w-full h-full z-0">
-                <Image
+                <img
                     src="/fotosim.png"
                     alt="Simracing Background"
-                    fill
-                    className="object-cover opacity-30"
-                    priority
+                    className="w-full h-full object-cover opacity-30"
                 />
             </div>
 
@@ -26,12 +23,10 @@ const HeroSection = () => {
 
                     <div className="flex flex-col items-center md:items-start md:pl-6 w-full">
                         <div className="mb-2 relative w-[280px] md:w-full max-w-[350px] h-28 sm:h-32 md:h-40 lg:h-48">
-                            <Image
+                            <img
                                 src="/logocockpitpng.png"
                                 alt="Cockpit UY Logo"
-                                fill
-                                className="object-contain object-center md:object-left"
-                                priority
+                                className="w-full h-full object-contain object-center md:object-left"
                             />
                         </div>
 
@@ -53,13 +48,11 @@ const HeroSection = () => {
                 </div>
 
                 {/* Right Image */}
-                <div className="hidden md:block relative h-[400px] md:h-auto w-full">
-                    <Image
+                <div className="hidden md:block relative h-[400px] md:h-auto w-full overflow-hidden">
+                    <img
                         src="/fotosim.png"
                         alt="Simracing Setup"
-                        fill
-                        className="object-cover"
-                        priority
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
                     {/* Gradient overlay for better text readability if they overlap on mobile, 
                         or just for style blending */}

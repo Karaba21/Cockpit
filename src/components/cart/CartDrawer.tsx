@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+
 import { X, Trash2, Minus, Plus, Truck } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { logEvent } from '@/lib/fpixel';
@@ -132,11 +132,11 @@ const CartDrawer = () => {
                                 <div key={item.id} className="flex gap-4">
                                     <div className="w-20 h-20 bg-white/5 rounded overflow-hidden flex-shrink-0 relative">
                                         {item.images[0] ? (
-                                            <Image
+                                            <img
                                                 src={item.images[0].url}
                                                 alt={item.images[0].altText || item.title}
-                                                fill
-                                                className="object-cover"
+                                                loading="lazy"
+                                                className="absolute inset-0 w-full h-full object-cover"
                                             />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">No Image</div>
@@ -218,35 +218,35 @@ const CartDrawer = () => {
                     {/* Payment Methods Info */}
                     <div className="flex items-center justify-center gap-4 pt-4 mt-4 border-t border-white/10">
                         <div className="relative w-10 h-6">
-                            <Image
+                            <img
                                 src="/carrusel/masterlogo-removebg-preview.png"
                                 alt="Mastercard"
-                                fill
-                                className="object-contain"
+                                loading="lazy"
+                                className="w-full h-full object-contain"
                             />
                         </div>
                         <div className="relative w-12 h-6">
-                            <Image
+                            <img
                                 src="/carrusel/VISA-Logo.png"
                                 alt="Visa"
-                                fill
-                                className="object-contain"
+                                loading="lazy"
+                                className="w-full h-full object-contain"
                             />
                         </div>
                         <div className="relative w-16 h-8">
-                            <Image
+                            <img
                                 src="/carrusel/mercadopagoo.png"
                                 alt="Mercado Pago"
-                                fill
-                                className="object-contain"
+                                loading="lazy"
+                                className="w-full h-full object-contain"
                             />
                         </div>
                         <div className="relative w-16 h-6">
-                            <Image
+                            <img
                                 src="/carrusel/abitab-removebg-preview.png"
                                 alt="Abitab"
-                                fill
-                                className="object-contain"
+                                loading="lazy"
+                                className="w-full h-full object-contain"
                             />
                         </div>
                     </div>

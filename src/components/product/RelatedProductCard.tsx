@@ -13,7 +13,7 @@ const RelatedProductCard: React.FC<RelatedProductCardProps> = ({ product }) => {
 
     return (
         <div className="group relative bg-surface-light rounded-lg overflow-hidden border border-border transition-all hover:border-primary/50 h-full flex flex-col">
-            <Link href={`/producto/${product.handle}`} className="block relative aspect-square overflow-hidden bg-white/5 shrink-0" tabIndex={-1}>
+            <Link href={`/producto/${product.handle}`} prefetch={false} className="block relative aspect-square overflow-hidden bg-white/5 shrink-0" tabIndex={-1}>
                 {product.images[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -37,7 +37,7 @@ const RelatedProductCard: React.FC<RelatedProductCardProps> = ({ product }) => {
 
             <div className="p-3 flex flex-col flex-1">
                 <h3 className="text-sm font-semibold mb-1 line-clamp-2 min-h-[2.5rem] group-hover:text-primary transition-colors">
-                    <Link href={`/producto/${product.handle}`} className="focus:outline-none focus:underline">
+                    <Link href={`/producto/${product.handle}`} prefetch={false} className="focus:outline-none focus:underline">
                         {product.title}
                     </Link>
                 </h3>
@@ -56,6 +56,7 @@ const RelatedProductCard: React.FC<RelatedProductCardProps> = ({ product }) => {
                 <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus-within:opacity-100">
                     <Link
                         href={`/producto/${product.handle}`}
+                        prefetch={false}
                         className="block w-full text-center text-xs font-bold uppercase tracking-wider text-primary border border-primary/30 rounded py-2 hover:bg-primary hover:text-white transition-colors"
                     >
                         Ver producto

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 interface CategoryCardProps {
     title: string;
@@ -11,14 +10,15 @@ interface CategoryCardProps {
 const CategoryCard = ({ title, imageSrc, href, className = '' }: CategoryCardProps) => (
     <Link
         href={href}
+        prefetch={false}
         className={`relative group overflow-hidden rounded-2xl block ${className}`}
     >
         <div className="absolute inset-0 z-0">
-            <Image
+            <img
                 src={imageSrc}
                 alt={title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
         </div>

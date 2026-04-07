@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { Check, X } from 'lucide-react';
 
 const comparisonData = [
@@ -50,11 +49,11 @@ export default function ComparisonSection() {
 
             <div className="p-4 md:p-8 flex flex-col items-center justify-end text-center border-r border-white/5">
               <div className="relative w-28 h-28 md:w-52 md:h-52 mb-6 rounded-2xl overflow-hidden opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-                <Image
+                <img
                   src="/comparison1.jpeg"
                   alt="Escritorio"
-                  fill
-                  className="object-cover"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-xs md:text-xl font-bold text-white/50 uppercase tracking-widest">Escritorio</h3>
@@ -62,11 +61,11 @@ export default function ComparisonSection() {
 
             <div className="p-4 md:p-8 flex flex-col items-center justify-end text-center bg-white/[0.02]">
               <div className="relative w-32 h-32 md:w-60 md:h-60 mb-6 rounded-2xl overflow-hidden">
-                <Image
+                <img
                   src="/comparison2.jpeg"
                   alt="Soporte Cockpit"
-                  fill
-                  className="object-cover drop-shadow-2xl"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover drop-shadow-2xl"
                 />
               </div>
               <h3 className="text-xs md:text-xl font-black text-white uppercase tracking-widest">Soporte Cockpit</h3>

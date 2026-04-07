@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const PickupSection = () => {
@@ -62,12 +61,11 @@ const PickupSection = () => {
 
                     {/* Right Side - Map Image */}
                     <div className="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden border border-asfalto shadow-lg hover:shadow-xl transition-all duration-300">
-                        <Image
+                        <img
                             src="/ubicacion.png"
                             alt="Ubicación GP Automóviles"
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover"
                         />
                     </div>
                 </div>
