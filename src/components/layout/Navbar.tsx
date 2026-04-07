@@ -39,7 +39,7 @@ const Navbar = () => {
                 {/* Logo */}
                 <Link href="/" className="flex-shrink-0">
                     <img
-                        src="/logocockpit.png"
+                        src="/logocockpit.webp"
                         alt="Cockpit UY"
                         className="h-10 w-auto object-contain"
                     />

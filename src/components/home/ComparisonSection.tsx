@@ -50,7 +50,7 @@ export default function ComparisonSection() {
             <div className="p-4 md:p-8 flex flex-col items-center justify-end text-center border-r border-white/5">
               <div className="relative w-28 h-28 md:w-52 md:h-52 mb-6 rounded-2xl overflow-hidden opacity-70 group-hover:opacity-100 transition-opacity duration-300">
                 <img
-                  src="/comparison1.jpeg"
+                  src="/comparison1.webp"
                   alt="Escritorio"
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
@@ -62,7 +62,7 @@ export default function ComparisonSection() {
             <div className="p-4 md:p-8 flex flex-col items-center justify-end text-center bg-white/[0.02]">
               <div className="relative w-32 h-32 md:w-60 md:h-60 mb-6 rounded-2xl overflow-hidden">
                 <img
-                  src="/comparison2.jpeg"
+                  src="/comparison2.webp"
                   alt="Soporte Cockpit"
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover drop-shadow-2xl"

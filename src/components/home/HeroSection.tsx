@@ -7,7 +7,7 @@ const HeroSection = () => {
             {/* Mobile Background Image */}
             <div className="md:hidden absolute inset-0 w-full h-full z-0">
                 <img
-                    src="/fotosim.png"
+                    src="/fotosim.webp"
                     alt="Simracing Background"
                     className="w-full h-full object-cover opacity-30"
                 />
@@ -24,7 +24,7 @@ const HeroSection = () => {
                     <div className="flex flex-col items-center md:items-start md:pl-6 w-full">
                         <div className="mb-2 relative w-[280px] md:w-full max-w-[350px] h-28 sm:h-32 md:h-40 lg:h-48">
                             <img
-                                src="/logocockpitpng.png"
+                                src="/logocockpitpng.webp"
                                 alt="Cockpit UY Logo"
                                 className="w-full h-full object-contain object-center md:object-left"
                             />
@@ -50,7 +50,7 @@ const HeroSection = () => {
                 {/* Right Image */}
                 <div className="hidden md:block relative h-[400px] md:h-auto w-full overflow-hidden">
                     <img
-                        src="/fotosim.png"
+                        src="/fotosim.webp"
                         alt="Simracing Setup"
                         className="absolute inset-0 w-full h-full object-cover"
                     />

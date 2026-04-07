@@ -3,17 +3,17 @@
 import React from 'react';
 
 const reviewImages = [
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.47.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.49.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.52.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.56.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.58 (1).jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.58.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.01.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.04.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.07 (1).jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.07.jpeg',
-    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.08.jpeg',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.47.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.49.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.52.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.56.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.58 (1).webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.25.58.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.01.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.04.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.07 (1).webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.07.webp',
+    '/reseñas/WhatsApp Image 2025-12-02 at 16.26.08.webp',
 ];
 
 const ReviewsCarousel = () => {

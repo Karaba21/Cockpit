@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
         };
     }
 
-    const productImage = product.images[0]?.url || `${siteUrl}/opengraph.png`;
+    const productImage = product.images[0]?.url || `${siteUrl}/opengraph.webp`;
     const price = product.price;
     const currency = 'UYU';
 

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${siteUrl}/ogimage1200x630.png`,
+        url: `${siteUrl}/ogimage1200x630.webp`,
         width: 1200,
         height: 630,
         alt: 'Cockpit UY',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: [`${siteUrl}/ogimage1200x630.png`],
+    images: [`${siteUrl}/ogimage1200x630.webp`],
   },
   alternates: {
     canonical: '/',

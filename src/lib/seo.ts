@@ -39,7 +39,7 @@ export const seoConfig = {
   },
   organization: {
     name: 'Cockpit UY',
-    logo: '/opengraph.png',
+    logo: '/opengraph.webp',
     address: {
       addressCountry: 'UY',
       addressLocality: 'Uruguay',

@@ -29,7 +29,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
             type: 'website',
             images: [
                 {
-                    url: `${siteUrl}/opengraph.png`,
+                    url: `${siteUrl}/opengraph.webp`,
                     width: 1200,
                     height: 630,
                     alt: 'Cockpit UY',
@@ -38,7 +38,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
         },
         twitter: {
             card: 'summary_large_image',
-            images: [`${siteUrl}/opengraph.png`],
+            images: [`${siteUrl}/opengraph.webp`],
         },
         alternates: {
             canonical: query ? `/search?q=${encodeURIComponent(query)}` : '/search',

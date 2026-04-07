@@ -265,7 +265,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ product }) => {
             {/* Guarantee Image */}
             <div className="mt-4 flex justify-center w-full">
                 <img
-                    src="/garantia-compra.png"
+                    src="/garantia-compra.webp"
                     alt="Garantía de compra"
                     className="w-3/4 h-auto object-contain"
                 />

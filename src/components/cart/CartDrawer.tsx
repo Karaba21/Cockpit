@@ -219,7 +219,7 @@ const CartDrawer = () => {
                     <div className="flex items-center justify-center gap-4 pt-4 mt-4 border-t border-white/10">
                         <div className="relative w-10 h-6">
                             <img
-                                src="/carrusel/masterlogo-removebg-preview.png"
+                                src="/carrusel/masterlogo-removebg-preview.webp"
                                 alt="Mastercard"
                                 loading="lazy"
                                 className="w-full h-full object-contain"
@@ -227,7 +227,7 @@ const CartDrawer = () => {
                         </div>
                         <div className="relative w-12 h-6">
                             <img
-                                src="/carrusel/VISA-Logo.png"
+                                src="/carrusel/VISA-Logo.webp"
                                 alt="Visa"
                                 loading="lazy"
                                 className="w-full h-full object-contain"
@@ -235,7 +235,7 @@ const CartDrawer = () => {
                         </div>
                         <div className="relative w-16 h-8">
                             <img
-                                src="/carrusel/mercadopagoo.png"
+                                src="/carrusel/mercadopagoo.webp"
                                 alt="Mercado Pago"
                                 loading="lazy"
                                 className="w-full h-full object-contain"
@@ -243,7 +243,7 @@ const CartDrawer = () => {
                         </div>
                         <div className="relative w-16 h-6">
                             <img
-                                src="/carrusel/abitab-removebg-preview.png"
+                                src="/carrusel/abitab-removebg-preview.webp"
                                 alt="Abitab"
                                 loading="lazy"
                                 className="w-full h-full object-contain"

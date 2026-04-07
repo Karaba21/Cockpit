@@ -41,21 +41,21 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicons/favicon-16x16.webp', sizes: '16x16', type: 'image/png' },
+      { url: '/favicons/favicon-32x32.webp', sizes: '32x32', type: 'image/png' },
       { url: '/favicons/favicon.ico', sizes: 'any' },
     ],
     apple: [
-      { url: '/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/favicons/apple-touch-icon.webp', sizes: '180x180', type: 'image/png' },
     ],
     other: [
       {
         rel: 'android-chrome-192x192',
-        url: '/favicons/android-chrome-192x192.png',
+        url: '/favicons/android-chrome-192x192.webp',
       },
       {
         rel: 'android-chrome-512x512',
-        url: '/favicons/android-chrome-512x512.png',
+        url: '/favicons/android-chrome-512x512.webp',
       },
     ],
   },
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: `${siteUrl}/opengraph.png`,
+        url: `${siteUrl}/opengraph.webp`,
         width: 1200,
         height: 630,
         alt: siteName,
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${siteName} | Líderes en Simracing`,
     description: defaultDescription,
-    images: [`${siteUrl}/opengraph.png`],
+    images: [`${siteUrl}/opengraph.webp`],
   },
   robots: {
     index: true,
@@ -110,7 +110,7 @@ export default function RootLayout({
     name: siteName,
     description: defaultDescription,
     url: siteUrl,
-    logo: `${siteUrl}/opengraph.png`,
+    logo: `${siteUrl}/opengraph.webp`,
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'UY',

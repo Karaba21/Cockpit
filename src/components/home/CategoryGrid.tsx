@@ -38,14 +38,14 @@ const CategoryGrid = () => {
 
                 <CategoryCard
                     title="Volantes"
-                    imageSrc="/volantes6deff.png"
+                    imageSrc="/volantes6deff.webp"
                     href="/catalogo?category=volantes-1"
                     className="h-[350px]"
                 />
 
                 <CategoryCard
                     title="Soportes"
-                    imageSrc="/sims6deff.png"
+                    imageSrc="/sims6deff.webp"
                     href="/catalogo?category=soportes"
                     className="h-[350px]"
                 />
@@ -53,7 +53,7 @@ const CategoryGrid = () => {
 
                 <CategoryCard
                     title="Accesorios"
-                    imageSrc="/extras6def.png"
+                    imageSrc="/extras6def.webp"
                     href="/catalogo?category=accesorios"
                     className="h-[350px]"
                 />

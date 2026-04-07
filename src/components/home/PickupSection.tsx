@@ -62,7 +62,7 @@ const PickupSection = () => {
                     {/* Right Side - Map Image */}
                     <div className="relative w-full h-[400px] lg:h-[500px] rounded-lg overflow-hidden border border-asfalto shadow-lg hover:shadow-xl transition-all duration-300">
                         <img
-                            src="/ubicacion.png"
+                            src="/ubicacion.webp"
                             alt="Ubicación GP Automóviles"
                             loading="lazy"
                             className="absolute inset-0 w-full h-full object-cover"
