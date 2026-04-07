@@ -41,21 +41,21 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicons/favicon-16x16.webp', sizes: '16x16', type: 'image/png' },
-      { url: '/favicons/favicon-32x32.webp', sizes: '32x32', type: 'image/png' },
+      { url: '/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicons/favicon.ico', sizes: 'any' },
     ],
     apple: [
-      { url: '/favicons/apple-touch-icon.webp', sizes: '180x180', type: 'image/png' },
+      { url: '/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     other: [
       {
         rel: 'android-chrome-192x192',
-        url: '/favicons/android-chrome-192x192.webp',
+        url: '/favicons/android-chrome-192x192.png',
       },
       {
         rel: 'android-chrome-512x512',
-        url: '/favicons/android-chrome-512x512.webp',
+        url: '/favicons/android-chrome-512x512.png',
       },
     ],
   },
