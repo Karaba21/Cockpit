@@ -28,6 +28,8 @@ const PaymentCarousel = () => {
                         <img
                             src={img.src}
                             alt={img.alt}
+                            loading="lazy"
+                            decoding="async"
                             className="h-8 md:h-9 w-auto object-contain"
                         />
                     </div>
@@ -38,6 +40,8 @@ const PaymentCarousel = () => {
                         <img
                             src={img.src}
                             alt={img.alt}
+                            loading="lazy"
+                            decoding="async"
                             className="h-8 md:h-9 w-auto object-contain"
                         />
                     </div>

@@ -9,6 +9,7 @@ const HeroSection = () => {
                 <img
                     src="/fotosim.webp"
                     alt="Simracing Background"
+                    decoding="async"
                     className="w-full h-full object-cover opacity-30"
                 />
             </div>
@@ -26,6 +27,7 @@ const HeroSection = () => {
                             <img
                                 src="/logocockpitpng.webp"
                                 alt="Cockpit UY Logo"
+                                decoding="async"
                                 className="w-full h-full object-contain object-center md:object-left"
                             />
                         </div>
@@ -52,6 +54,7 @@ const HeroSection = () => {
                     <img
                         src="/fotosim.webp"
                         alt="Simracing Setup"
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                     {/* Gradient overlay for better text readability if they overlap on mobile, 

@@ -116,7 +116,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
             {/* Category Carousel Selector */}
             <div className="flex flex-col items-center gap-2 mb-0">
                 <div className="flex items-center justify-center gap-8 md:gap-12">
-                    <Link href={getLink(prevCategory.param)} aria-label="Categoría anterior" className="text-gray-400 hover:text-primary transition-colors">
+                    <Link href={getLink(prevCategory.param)} prefetch={false} aria-label="Categoría anterior" className="text-gray-400 hover:text-primary transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                         </svg>
@@ -126,7 +126,7 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                         {currentCategoryObj.name}
                     </h1>
 
-                    <Link href={getLink(nextCategory.param)} aria-label="Categoría siguiente" className="text-gray-400 hover:text-primary transition-colors">
+                    <Link href={getLink(nextCategory.param)} prefetch={false} aria-label="Categoría siguiente" className="text-gray-400 hover:text-primary transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
@@ -136,10 +136,10 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
                 {/* Subcategories for Soportes */}
                 {isSoportesActive && (
                     <div className="flex gap-2 justify-center animate-fade-in-down">
-                        <Link href="/catalogo?category=plegables" className={getButtonClass('plegables', true)}>
+                        <Link href="/catalogo?category=plegables" prefetch={false} className={getButtonClass('plegables', true)}>
                             Plegables
                         </Link>
-                        <Link href="/catalogo?category=soportes-rigidos" className={getButtonClass('soportes-rigidos', true)}>
+                        <Link href="/catalogo?category=soportes-rigidos" prefetch={false} className={getButtonClass('soportes-rigidos', true)}>
                             Rígidos
                         </Link>
                     </div>

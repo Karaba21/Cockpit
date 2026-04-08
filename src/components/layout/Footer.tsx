@@ -32,10 +32,10 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Navegación</h4>
                         <ul className="space-y-2 text-sm text-arena">
-                            <li><Link href="/" className="hover:text-primary transition-all duration-300 hover:pl-1">Home</Link></li>
-                            <li><Link href="/catalogo" className="hover:text-primary transition-all duration-300 hover:pl-1">Catalogo</Link></li>
-                            <li><Link href="#reviews" className="hover:text-primary transition-all duration-300 hover:pl-1">Reviews</Link></li>
-                            <li><Link href="#pickup" className="hover:text-primary transition-all duration-300 hover:pl-1">Pickup</Link></li>
+                            <li><Link href="/" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Home</Link></li>
+                            <li><Link href="/catalogo" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Catalogo</Link></li>
+                            <li><Link href="#reviews" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Reviews</Link></li>
+                            <li><Link href="#pickup" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Pickup</Link></li>
                             <li><button onClick={() => setIsCartOpen(true)} className="hover:text-primary transition-all duration-300 hover:pl-1 text-left w-full">Carrito</button></li>
                         </ul>
                     </div>
@@ -44,9 +44,9 @@ const Footer = () => {
                     <div className="col-span-1">
                         <h4 className="font-bold uppercase text-sm mb-4 tracking-wide">Legal</h4>
                         <ul className="space-y-2 text-sm text-arena">
-                            <li><Link href="/politica-de-privacidad" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de privacidad</Link></li>
-                            <li><Link href="/politica-de-reembolso" className="hover:text-primary transition-all duration-300 hover:pl-1">Política de reembolso</Link></li>
-                            <li><Link href="/terminos-del-servicio" className="hover:text-primary transition-all duration-300 hover:pl-1">Términos del servicio</Link></li>
+                            <li><Link href="/politica-de-privacidad" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Política de privacidad</Link></li>
+                            <li><Link href="/politica-de-reembolso" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Política de reembolso</Link></li>
+                            <li><Link href="/terminos-del-servicio" prefetch={false} className="hover:text-primary transition-all duration-300 hover:pl-1">Términos del servicio</Link></li>
                         </ul>
                     </div>
 

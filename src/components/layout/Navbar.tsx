@@ -37,7 +37,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Logo */}
-                <Link href="/" className="flex-shrink-0">
+                <Link href="/" prefetch={false} className="flex-shrink-0">
                     <img
                         src="/logocockpit.webp"
                         alt="Cockpit UY"
@@ -47,33 +47,33 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center space-x-8">
-                    <Link href="/" className="text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                    <Link href="/" prefetch={false} className="text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                         Home
                     </Link>
 
                     <div className="relative group py-2">
-                        <Link href="/catalogo" className="flex items-center gap-1 text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                        <Link href="/catalogo" prefetch={false} className="flex items-center gap-1 text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                             Catalogo
                             <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
                         </Link>
                         {/* Desktop Dropdown Menu */}
                         <div className="absolute left-0 top-full -mt-2 w-56 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] bg-black/95 backdrop-blur-md border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden">
                             <div className="py-2 flex flex-col">
-                                <Link href="/catalogo" className="px-5 py-2.5 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Todos los productos</Link>
+                                <Link href="/catalogo" prefetch={false} className="px-5 py-2.5 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Todos los productos</Link>
                                 <div className="h-px w-full bg-white/10 my-1"></div>
-                                <Link href="/catalogo?category=soportes" className="px-5 py-2 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Soportes</Link>
-                                <Link href="/catalogo?category=plegables" className="px-5 py-2 text-xs text-gray-400 hover:text-primary transition-colors uppercase tracking-wide pl-8">• Plegables</Link>
-                                <Link href="/catalogo?category=soportes-rigidos" className="px-5 py-2 text-xs text-gray-400 hover:text-primary transition-colors uppercase tracking-wide pl-8">• Rígidos</Link>
-                                <Link href="/catalogo?category=volantes-1" className="px-5 py-2 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Volantes</Link>
-                                <Link href="/catalogo?category=accesorios" className="px-5 py-2 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Accesorios</Link>
+                                <Link href="/catalogo?category=soportes" prefetch={false} className="px-5 py-2 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Soportes</Link>
+                                <Link href="/catalogo?category=plegables" prefetch={false} className="px-5 py-2 text-xs text-gray-400 hover:text-primary transition-colors uppercase tracking-wide pl-8">• Plegables</Link>
+                                <Link href="/catalogo?category=soportes-rigidos" prefetch={false} className="px-5 py-2 text-xs text-gray-400 hover:text-primary transition-colors uppercase tracking-wide pl-8">• Rígidos</Link>
+                                <Link href="/catalogo?category=volantes-1" prefetch={false} className="px-5 py-2 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Volantes</Link>
+                                <Link href="/catalogo?category=accesorios" prefetch={false} className="px-5 py-2 text-sm font-bold text-foreground hover:bg-primary/20 hover:text-primary transition-colors uppercase tracking-wide">Accesorios</Link>
                             </div>
                         </div>
                     </div>
 
-                    <Link href="/#reviews" className="text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                    <Link href="/#reviews" prefetch={false} className="text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                         Reseñas
                     </Link>
-                    <Link href="/#pickup" className="text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
+                    <Link href="/#pickup" prefetch={false} className="text-foreground hover:text-primary transition-all duration-300 font-bold uppercase text-sm tracking-wide hover:drop-shadow-[0_0_8px_rgba(246,146,30,0.6)]">
                         Pickup
                     </Link>
                 </nav>
@@ -106,6 +106,7 @@ const Navbar = () => {
                 <div className="flex flex-col px-6 space-y-1">
                     <Link
                         href="/"
+                        prefetch={false}
                         className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 px-4 rounded-lg hover:bg-white/5"
                         onClick={() => setIsMenuOpen(false)}
                     >
@@ -128,7 +129,7 @@ const Navbar = () => {
 
                         {/* Mobile Submenu */}
                         <div className={`flex flex-col overflow-hidden transition-all duration-300 ${isMobileCatalogOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                            <Link href="/catalogo" className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 pl-8 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
+                            <Link href="/catalogo" prefetch={false} className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 pl-8 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
                                 <span className="transform transition-transform duration-300 group-hover:translate-x-2 tracking-wide text-sm opacity-90">Todos los productos</span>
                             </Link>
 
@@ -147,19 +148,19 @@ const Navbar = () => {
                                 </button>
 
                                 <div className={`flex flex-col overflow-hidden transition-all duration-300 ${isMobileSoportesOpen ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                    <Link href="/catalogo?category=plegables" className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-2 pl-12 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
+                                    <Link href="/catalogo?category=plegables" prefetch={false} className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-2 pl-12 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
                                         <span className="transform transition-transform duration-300 group-hover:translate-x-2 tracking-wide text-xs text-gray-400">Plegables</span>
                                     </Link>
-                                    <Link href="/catalogo?category=soportes-rigidos" className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-2 pl-12 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
+                                    <Link href="/catalogo?category=soportes-rigidos" prefetch={false} className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-2 pl-12 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
                                         <span className="transform transition-transform duration-300 group-hover:translate-x-2 tracking-wide text-xs text-gray-400">Rígidos</span>
                                     </Link>
                                 </div>
                             </div>
 
-                            <Link href="/catalogo?category=volantes-1" className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 pl-8 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
+                            <Link href="/catalogo?category=volantes-1" prefetch={false} className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 pl-8 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
                                 <span className="transform transition-transform duration-300 group-hover:translate-x-2 tracking-wide text-sm opacity-90">Volantes</span>
                             </Link>
-                            <Link href="/catalogo?category=accesorios" className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 pl-8 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
+                            <Link href="/catalogo?category=accesorios" prefetch={false} className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 pl-8 pr-4 rounded-lg hover:bg-white/5" onClick={() => setIsMenuOpen(false)}>
                                 <span className="transform transition-transform duration-300 group-hover:translate-x-2 tracking-wide text-sm opacity-90">Accesorios</span>
                             </Link>
                         </div>
@@ -167,6 +168,7 @@ const Navbar = () => {
 
                     <Link
                         href="/#reviews"
+                        prefetch={false}
                         className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 px-4 rounded-lg hover:bg-white/5"
                         onClick={() => setIsMenuOpen(false)}
                     >
@@ -174,6 +176,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                         href="/#pickup"
+                        prefetch={false}
                         className="group flex items-center text-foreground hover:text-primary transition-all duration-300 font-bold uppercase py-3 px-4 rounded-lg hover:bg-white/5"
                         onClick={() => setIsMenuOpen(false)}
                     >

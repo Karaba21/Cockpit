@@ -86,6 +86,8 @@ export default function ProductGallery({ media, productTitle, isOnSale }: Produc
             <img
                 src={item.url}
                 alt={item.altText}
+                loading={isMain ? 'eager' : 'lazy'}
+                decoding="async"
                 className={isMain ? 'w-full h-full object-cover' : 'w-full h-full object-cover'}
             />
         );
@@ -155,6 +157,8 @@ export default function ProductGallery({ media, productTitle, isOnSale }: Produc
                                         <img
                                             src={item.previewImage}
                                             alt={`${item.altText} - miniatura`}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover"
                                         />
                                     ) : (
@@ -186,6 +190,8 @@ export default function ProductGallery({ media, productTitle, isOnSale }: Produc
                                 <img
                                     src={item.url}
                                     alt={`${item.altText} - miniatura`}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover"
                                 />
                             )}
