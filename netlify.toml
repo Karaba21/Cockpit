@@ -52,3 +52,28 @@
   for = "/*.woff"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Block WordPress/CMS scan bots — handled at CDN edge, no bandwidth consumed
+[[redirects]]
+  from = "/wp-*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.env*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/xmlrpc.php"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/admin*"
+  to = "/404"
+  status = 404
+  force = true
