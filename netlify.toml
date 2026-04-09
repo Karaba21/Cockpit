@@ -36,6 +36,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Cache everything in /favicons/ for 1 year
+[[headers]]
+  for = "/favicons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # Cache JS/CSS (Next.js hashed files) for 1 year
 [[headers]]
   for = "/_next/static/*"
@@ -52,6 +58,13 @@
   for = "/*.woff"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirect /favicon.ico to actual location so browsers cache it (301 permanent)
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/favicons/favicon.ico"
+  status = 301
+  force = true
 
 # Block WordPress/CMS scan bots — handled at CDN edge, no bandwidth consumed
 [[redirects]]
